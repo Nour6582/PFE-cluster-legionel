@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>My sign up  page</title>
+</head>
+<body>
+
+<form method="POST">
+  {% csrf_token %}
+  {{form.as_p}}<!---comme paragraphe ya un attribue as_p -->
+ <button type="submit">submit</button>
+ </form>
+
+</body>
+</html>

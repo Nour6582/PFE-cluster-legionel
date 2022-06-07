@@ -9,9 +9,35 @@ from django.contrib.auth.models import AbstractUser
 # Create your models here.
 
 class User(AbstractUser):
-    #tel=models.IntegerField()
-    is_introducteur=models.BooleanField(default=True)
+   
+   
+    telPortable=models.IntegerField(('Tel portable'),blank=True,null=True)
+    fax=models.IntegerField(blank=True,null=True)
+    nomUser=models.CharField(max_length=30,blank=True,unique=True,null=True)
+    is_attente=models.BooleanField(default=True)
+    is_Medecin=models.BooleanField(default=False)
     is_admin=models.BooleanField(default=False)
+    def __str__(self):
+        return self.nomUser
+
+
+
+
+
+
+
+
+
+
+
+
+#creer l user en utilisant le numero de securite pour associer le compte 
+
+
+
+
+
+
 
 class UserProfile(models.Model):
     user=models.OneToOneField(User,on_delete=models.CASCADE)
@@ -23,18 +49,7 @@ class UserProfile(models.Model):
 
 
         
-class introducteurDinfo(models.Model):
-    Nom=models.CharField(max_length=30)
-    Prenom=models.CharField(max_length=30)
-    Email=models.EmailField(blank=True)
-    telPortable=models.IntegerField(('Tel portable'))
-    tel=models.IntegerField()
-    fax=models.IntegerField()
-    #CHOICES = [('option1','label 1'), ('option2','label 2')] 
-    #some_field = forms.ChoiceField(choices=CHOICES,widget=forms.RadioSelect())
-    #user=models.OneToOneField(User,on_delete=models.CASCADE)  
-    def __str__(self):
-        return self.Prenom
+
 
 
 
@@ -131,7 +146,7 @@ class formulaire(models.Model):
     identitePatient=models.OneToOneField("identitePatient",on_delete=models.CASCADE)
 
     #iintroducteur de l'information
-    introducteurDinfo=models.ForeignKey("introducteurDinfo",on_delete=models.CASCADE)
+    medecin=models.ForeignKey(User,on_delete=models.CASCADE)
 
     etatDuPatient=models.CharField(("Etat du patient"),choices=etatDuPatient.choices,max_length=45)
     DiagnosticDepathologiChronique=models.CharField(("Diagnostic de pathologie chronique"),max_length=1000)

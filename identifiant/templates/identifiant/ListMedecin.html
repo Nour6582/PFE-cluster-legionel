@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+{% block  content %}
+
+{% for elt in Medecin %}
+	<li>
+		<a href=" {% url  'identifiant:detail'  elt.id %} "><ol>{{elt}}</ol></a>
+	</li>
+{% endfor %}
+{% endblock content %}

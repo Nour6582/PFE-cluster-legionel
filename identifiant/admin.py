@@ -4,7 +4,7 @@ from .models import *
 admin.site.register(User)
 
 admin.site.register(identitePatient)
-admin.site.register(introducteurDinfo)
+
 #admin.site.register(telephone)
 #3admin.site.register(id)
 admin.site.register(lieu)

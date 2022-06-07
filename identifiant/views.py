@@ -1,4 +1,4 @@
-from audioop import reverse
+from django.urls import reverse
 from multiprocessing import context
 from re import T, template
 from typing import Generic
@@ -8,24 +8,52 @@ from django.shortcuts import render,redirect
 from django.views import generic
 from django.views.generic import TemplateView,DeleteView,CreateView,ListView,DetailView,UpdateView
 from .forms import *
+from django.conf import settings
+from django.contrib.auth import login
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib import messages 
 # Create your views here.
-class signup(generic.CreateView):
-    template_name="registration/signup.html"
-    form_class=CustomUserCreationForm
-    def get_success_url(self):
-        return "login"
+
+
+def signup(request):
+    form = SignupForm()
+    if request.method == 'POST':
+        form = SignupForm(request.POST)
+        if form.is_valid():
+            user = form.save()
+            # auto-login user
+            login(request, user)
+            return redirect(settings.LOGIN_REDIRECT_URL)
+    return render(request, 'registration/signup.html', context={'form': form})
+
+
+
 
 def homepage(request):
     mes="hello it's homepage"
     context= {  'mes':mes }
-    return render(request,"identifiant/h.html",context)
+    return render(request,"identifiant/homepage.html",context)
     
 def hi(request):
     return render(request,"identifiant/h.html")
-
-
+####LIste des medecin
+class ListMedecin(ListView):
+    template_name="identifiant/ListMedecin.html"
+    queryset=User.objects.all()
+    context_object_name="Medecin"
+#####DetailMedecin
+class DetailMedecin(DetailView):
+    template_name="identifiant/DetailMedecin.html"
+    queryset=User.objects.all()
+    context_object_name="Medecin"   
+#########update du medecin    
+class updateUser(LoginRequiredMixin,UpdateView):
+    template_name="identifiant/updateUser.html"
+    queryset=User.objects.all()
+    form_class=updateUsermodelForm
+    def get_success_url(self):
+        return reverse("identifiant:login")
+    
 
 
 
@@ -125,22 +153,7 @@ def create(request):
 
 
          ######Gerer la creation de compte de l'introducteur d'info###
-            NomMedecin=form.cleaned_data['NomMedecin']
-            PrenomMedecin=form.cleaned_data['PrenomMedecin']
-            EmailMedecin=form.cleaned_data['EmailMedecin']
-            telPortableMedecin=form.cleaned_data['telPortableMedecin']
-            telMedecin=form.cleaned_data['telMedecin']
-            faxMedecin=form.cleaned_data['faxMedecin']
             
-            introducteurinfo=introducteurDinfo.objects.create(
-                Nom=NomMedecin,
-                Prenom=PrenomMedecin,
-                Email=EmailMedecin,
-                telPortable=telPortableMedecin,
-                tel=telMedecin,
-                fax=faxMedecin,
-
-            )
          ######Gerer la creation du formulaire###
 
 
@@ -393,7 +406,7 @@ def create(request):
                 Date_Introduction=Date_Introduction,
                 patientvu=patientvu,
                 identitePatient=patient,
-                introducteurDinfo=introducteurinfo,
+                medecin=User.objects.get(username=request.user),
                 etatDuPatient=etatDuPatient,
                 DiagnosticDepathologiChronique=DiagnosticDepathologiChronique,
                 SipathologieChroniqueAso=SipathologieChroniqueAso,

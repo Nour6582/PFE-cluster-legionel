@@ -1,14 +1,9 @@
-<!DOCTYPE html>
-<html>
-<head>
-	<meta charset="utf-8">
-	<title>Page login</title>
-</head>
-<body>
+
+{%  block content%}
 <form method="post">
 {% csrf_token %}
 {{form.as_p}} 
 <button type="submit">submit</button>
 </form>
-</body>
-</html>
+ {% endblock content %}
+

@@ -5,15 +5,25 @@ from django.contrib.auth.forms import UserCreationForm,UserChangeForm,UsernameFi
 from django.contrib.auth import get_user_model
 from django import forms
 from .models import *
-from identifiant.models import introducteurDinfo
+
 
 User= get_user_model()
 
-class CustomUserCreationForm(UserCreationForm):
+
+
+#####updater le use
+class updateUsermodelForm(forms.ModelForm):
     class Meta:
-        model = User
-        fields = ("username",)
-        field_classes = {'username': UsernameField}
+        model=User
+        fields=(
+             'nomUser',
+        )
+
+########for registration
+class SignupForm(UserCreationForm):
+    class Meta(UserCreationForm.Meta):
+        model = get_user_model()
+        fields = ('username', 'email', 'first_name', 'last_name', 'nomUser','telPortable','fax')
 
 
 
@@ -96,13 +106,7 @@ class createform(forms.Form):
     #########
     #######
     #######
-    #######
-    NomMedecin=forms.CharField(label='Nom du Medecin',max_length=30)
-    PrenomMedecin=forms.CharField(label='Prenom du Medecin',max_length=30)
-    EmailMedecin=forms.EmailField(label='Email du Medecin')
-    telPortableMedecin=forms.IntegerField(label='Tel portable')
-    telMedecin=forms.IntegerField(label='telephone du Medecin')
-    faxMedecin=forms.IntegerField(label='fax du Medecin')
+    ####
      #Formulaire
     ########
     #######
@@ -181,13 +185,13 @@ class createform(forms.Form):
     #quelun sup coordoonners
     InfoSupDunEntourage=forms.CharField(label=" Connaissez-vous une personne ou plus, de votre entourage familial et/ou professionnel et/ou social (amis,..) qui a /ont les mêmes  symptômes que vous ? Si oui, préciser l’identité de cette/ces personnes et leurs coordonnées",widget=forms.Textarea,required=False)
     #Questionnaire adressé avec les prélèvements suivants : (cocher les cases correspondantes uniquement)
-    Liquide_de_ponction_pleurale=forms.DateField(label="Liquide de ponction pleurale")
-    Crachats=forms.DateField(label="Crachat")
-    Liquides_d_aspirations=forms.DateField(label="Liquides d'aspirations")
-    Lavage_broncho_pulmonaires=forms.DateField(label="Lavage broncho pulmonaires")
-    Urines=forms.DateField(label="Urines")
-    Sang=forms.DateField(label="Sang")      
-    AutrePrelevement=forms.DateField(label="Autre prelevement")
+    Liquide_de_ponction_pleurale=forms.DateField(label="Liquide de ponction pleurale",help_text="Veillez donnez la date du prelevement")
+    Crachats=forms.DateField(label="Crachat",help_text="Veillez donnez la date du prelevement")
+    Liquides_d_aspirations=forms.DateField(label="Liquides d'aspirations",help_text="Veillez donnez la date du prelevement")
+    Lavage_broncho_pulmonaires=forms.DateField(label="Lavage broncho pulmonaires",help_text="Veillez donnez la date du prelevement")
+    Urines=forms.DateField(label="Urines",help_text="Veillez donnez la date du prelevement")
+    Sang=forms.DateField(label="Sang",help_text="Veillez donnez la date du prelevement")      
+    AutrePrelevement=forms.DateField(label="Autre prelevement",help_text="Veillez donnez la date du prelevement")
 
     
         

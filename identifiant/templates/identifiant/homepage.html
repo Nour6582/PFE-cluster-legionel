@@ -6,7 +6,21 @@
 </head>
 <body>
 <h1>Page d'accueil</h1>
+<p> 
+<a href={% url 'identifiant:ListMedecin' %}> listes des Medecin </a></p>
 
+
+
+<p>
+
+{% if request.user.is_authenticated %}
+	<a href={% url 'identifiant:create' %}> Remplir le formulaire </a>
+{% endif %}
+
+</p>
+
+
+<hr>
 <p>Bienvenue dans la page de l'alerte du cluster page hi h.html</p>
 {% if  request.user.is_admin %}
 

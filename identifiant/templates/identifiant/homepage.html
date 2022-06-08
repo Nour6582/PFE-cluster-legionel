@@ -1,54 +1,10 @@
-<!DOCTYPE html>
-<html>
-<head>
-	<meta charset="utf-8">
-	<title>Page d'accueil</title>
-</head>
-<body>
-<h1>Page d'accueil</h1>
-<p> 
-<a href={% url 'identifiant:ListMedecin' %}> listes des Medecin </a></p>
+{% extends "base.html" %}
+{% block  content %}
 
-
-
-<p>
+<p>Bienvenue dans la page d'accueil de l'alerte du cluster </p>
 
 {% if request.user.is_authenticated %}
 	<a href={% url 'identifiant:create' %}> Remplir le formulaire </a>
 {% endif %}
 
-</p>
-
-
-<hr>
-<p>Bienvenue dans la page de l'alerte du cluster page hi h.html</p>
-{% if  request.user.is_admin %}
-
-	<a href={% url 'identifiant:signup' %}> sign up </a>
-    
-	<a href={% url 'identifiant:logout' %}> logout </a>
-
-{% endif %}
-
-
-
-
-
-
-{% if  request.user.is_introducteur %}
-
-	<a href={% url 'identifiant:login' %}> login </a>
-
-	<!--<a href={% url 'identifiant:create' %}> create </a>-->
-<a href={% url 'identifiant:logout' %}> logout </a>
-	<p>listes des introducteur d'information</p>
-
-{% endif %}
-
-<a href={% url 'identifiant:signup' %}> sign up </a>
-
-<a href={% url 'identifiant:login' %}> login </a>
-
-
-</body>
-</html>
+{% endblock %}

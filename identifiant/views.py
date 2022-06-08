@@ -1,3 +1,4 @@
+from xml.dom.minidom import Identified
 from django.urls import reverse
 from multiprocessing import context
 from re import T, template
@@ -12,6 +13,7 @@ from django.conf import settings
 from django.contrib.auth import login
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib import messages 
+from .models import User
 # Create your views here.
 
 
@@ -34,8 +36,7 @@ def homepage(request):
     context= {  'mes':mes }
     return render(request,"identifiant/homepage.html",context)
     
-def hi(request):
-    return render(request,"identifiant/h.html")
+
 ####LIste des medecin
 class ListMedecin(ListView):
     template_name="identifiant/ListMedecin.html"
@@ -46,6 +47,22 @@ class DetailMedecin(DetailView):
     template_name="identifiant/DetailMedecin.html"
     queryset=User.objects.all()
     context_object_name="Medecin"   
+#########DeleteMedecin
+class DeleteMedecin(DeleteView):
+    template_name="identifiant/DeleteMedecin.html"
+    queryset=User.objects.all()
+    context_object_name="Medecin" 
+    def get_success_url(self) :
+        return reverse("identifiant:ListMedecin")
+######validateMedecin
+def ValiderMedecin(request,pk):
+    Medecin=User.objects.get(id=pk)
+    Medecin.is_Medecin=True
+    Medecin.is_attente=False
+    Medecin.save()
+    return redirect("identifiant:ListMedecin")
+        
+
 #########update du medecin    
 class updateUser(LoginRequiredMixin,UpdateView):
     template_name="identifiant/updateUser.html"
@@ -66,8 +83,6 @@ def create(request):
         
         if form.is_valid():
             print("le form est ausi valide") 
-
-
          ######Gerer la creation de compte du patient###
             ####le lieu de naissance
             wilaya=form.cleaned_data['wilaya']
@@ -428,7 +443,7 @@ def create(request):
             context={
         "form":createform()
                  }
-            return render(request,"identifiant/create.html",context)  
+            return render(request,"identifiant/formulaire1.html",context)  
             
 
            
@@ -436,10 +451,6 @@ def create(request):
     context={
         "form":createform()
     }
-    return render(request,"identifiant/create.html",context)  
+    return render(request,"identifiant/formulaire1.html",context)  
 
-#class ccreate(LoginRequiredMixin,CreateView):
-    template_name="identifiant/create.html"
-    form_class=createmodelForm
-    def get_success_url(self):
-        return reverse('indentifiant/h.html')
+

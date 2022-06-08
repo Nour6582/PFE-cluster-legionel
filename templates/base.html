@@ -18,10 +18,23 @@
     </style>
 </head>
 <body>
-       <p><a href={% url 'identifiant:ListMedecin' %}> listes des Medecin </a></P> 
-        <p><a href={% url 'identifiant:login' %}> login</a></P>
-        <p><a href={% url 'identifiant:signup' %}> sign up </a></P>
+
        
+ {% if request.user.is_authenticated %}
+
+ <p>your are login in  as : <a href=" {% url  'identifiant:DetailMedecin'  request.user.id %} "> {{ request.user.username }}</a></p>
+<p>	<a href={% url 'identifiant:logout' %}> logout </a></p>
+
+{% else %}
+<p><a href={% url 'identifiant:signup' %}> sign up </a></P>
+
+<p><a href={% url 'identifiant:login' %}> login </a></p>
+{% endif %}
+{% if request.user.is_superuser  %}
+       <p><a href={% url 'identifiant:ListMedecin' %}> listes des Medecin </a></P> 
+       
+{% endif %}    
+    
         <hr>
 
     {%  block content%}

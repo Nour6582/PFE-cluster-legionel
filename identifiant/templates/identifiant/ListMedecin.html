@@ -1,9 +1,26 @@
 {% extends "base.html" %}
 {% block  content %}
-
+<p>Medecin en Attente de Validation</p>
 {% for elt in Medecin %}
-	<li>
-		<a href=" {% url  'identifiant:detail'  elt.id %} "><ol>{{elt}}</ol></a>
-	</li>
+    {% if elt.is_superuser  %}
+	{% else %}
+	<p>
+		{% if elt.is_attente %}
+		<a href=" {% url  'identifiant:DetailMedecin'  elt.id %} "><ol>{{elt}}</ol></a>
+		{% endif %}
+	</p>
+	{% endif %}
+{% endfor %}
+<hr>
+<p>Medecin Validé</p>
+{% for elt in Medecin %}
+    {% if elt.is_superuser  %}
+	{% else %}
+	<p>
+		{% if elt.is_Medecin %}
+		<a href=" {% url  'identifiant:DetailMedecin'  elt.id %} "><ol>{{elt}}</ol></a>
+		{% endif %}
+	</p>
+	{% endif %}
 {% endfor %}
 {% endblock content %}

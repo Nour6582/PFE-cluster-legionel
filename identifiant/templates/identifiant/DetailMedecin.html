@@ -2,9 +2,13 @@
 {% block  content %}
  
 <ul>
+  
     <li>{{ Medecin.Nom}}</li>
-    <li>{{ Medecin.Prenom}}</li>
-    <li> Matricule : {{ Medecin.nomUser}}</li>
-    <li></li>
+    <li>{{ Medecin.Prénom }}</li>
+    <li> {{ Medecin.NomUser}}</li>
 </ul
+
+<p>	<a href=" {% url  'identifiant:ValiderMedecin'  Medecin.id %} ">Valider</a></p>
+
+<p>	<a href=" {% url  'identifiant:DeleteMedecin'  Medecin.id %} ">Supprimer</a></p>
 {% endblock content %}

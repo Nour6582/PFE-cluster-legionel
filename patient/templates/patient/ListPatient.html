@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+{% block  content %}
+<p>Listes des Patient</p>
+
+{% for elt in Patient %}  
+	<p>
+		<a href=" {% url  'patient:DetailPatient'  elt.id %} "><ol>{{elt}}</ol></a>
+	</p>
+{% endfor %}
+{% endblock content %}

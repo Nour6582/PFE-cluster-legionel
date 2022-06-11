@@ -4,7 +4,9 @@
 <p>Bienvenue dans la page d'accueil de l'alerte du cluster </p>
 
 {% if request.user.is_authenticated %}
-	<a href={% url 'identifiant:create' %}> Remplir le formulaire </a>
+<p>	<a href={% url 'identifiant:create' %}> Remplir le formulaire </a></p>
+
+<p>	<a href={% url 'patient:ListPatient' %}> Voir la Listes des Patient </a></p>
 {% endif %}
 
 {% endblock %}

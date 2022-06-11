@@ -37,18 +37,20 @@ def homepage(request):
     return render(request,"identifiant/homepage.html",context)
     
 
-####LIste des medecin
-class ListMedecin(ListView):
+####Liste des medecin
+class ListMedecin(LoginRequiredMixin,ListView):
     template_name="identifiant/ListMedecin.html"
     queryset=User.objects.all()
     context_object_name="Medecin"
+
 #####DetailMedecin
-class DetailMedecin(DetailView):
+class DetailMedecin(LoginRequiredMixin,DetailView):
     template_name="identifiant/DetailMedecin.html"
     queryset=User.objects.all()
-    context_object_name="Medecin"   
+    context_object_name="med"   
+
 #########DeleteMedecin
-class DeleteMedecin(DeleteView):
+class DeleteMedecin(LoginRequiredMixin,DeleteView):
     template_name="identifiant/DeleteMedecin.html"
     queryset=User.objects.all()
     context_object_name="Medecin" 
@@ -150,8 +152,14 @@ def create(request):
             fax=form.cleaned_data['fax']
             Email=form.cleaned_data['Email']
 
-           
 
+#            userprofile=self.request.user.userprofile
+#        return identitePatient.objects.filter(userprofile=userprofile) 
+           ####medecin introducteur d'info
+
+            medecin1=User.objects.get(username=request.user),
+
+            medecin=medecin1[0]
             patient=identitePatient.objects.create(
                 Nom=Nom,
                 NomMarital=NomMarital,
@@ -163,6 +171,7 @@ def create(request):
                 fax=fax,
                 Email=Email,
                 ResidencePermanent=ResidencePermanent,
+                userprofile=medecin.userprofile,
             
             ) 
 
@@ -269,115 +278,7 @@ def create(request):
                 Therapieimmunosuppressiveencours1=typether[0]
 
 
-        #######2-Information clinique###
-            Fievre=form.cleaned_data["Fievre"]
-            Lethargie=form.cleaned_data["Lethargie"]
-            Myalgies_arthralgies=form.cleaned_data["Myalgies_arthralgies"]
-            Cephalees=form.cleaned_data["Cephalees"]
-            Tachycardie=form.cleaned_data["Tachycardie"]
-            Polypnee=form.cleaned_data["Polypnee"]
-            TouxSeche=form.cleaned_data["TouxSeche"]
-            TouxProductive=form.cleaned_data["TouxProductive"]
-            TouxPurulente=form.cleaned_data["TouxPurulente"]
-            DouleurThoracique=form.cleaned_data["DouleurThoracique"]
-           
-            Dyspnee=form.cleaned_data["Dyspnee"]
-            DefaillanceRespiratoire=form.cleaned_data["DefaillanceRespiratoire"]
-            Confusion=form.cleaned_data["Confusion"]
-            Diarrhees=form.cleaned_data["Diarrhees"]
-           
-            Vomissements=form.cleaned_data["Vomissements"]
-            Douleurs_abdominales=form.cleaned_data["Douleurs_abdominales"]
-            Epanchement_pleuralClinique=form.cleaned_data["Epanchement_pleuralClinique"]
-            AutreInfoClinique=form.cleaned_data["AutreInfoClinique"]
-            
-            InfoClinique1=InfoClinique.objects.create(
-                Fievre=Fievre,
-                Lethargie=Lethargie,
-                Myalgies_arthralgies=Myalgies_arthralgies,
-                Cephalees=Cephalees,
-                Tachycardie=Tachycardie,
-                Polypnee=Polypnee,
-                TouxSeche=TouxSeche,
-                TouxProductive=TouxProductive,
-                TouxPurulente=TouxPurulente,
-                DouleurThoracique=DouleurThoracique,
-                Dyspnee=Dyspnee,
-                DefaillanceRespiratoire=DefaillanceRespiratoire,
-                Confusion=Confusion,
-                Diarrhees=Diarrhees,
-                Vomissements=Vomissements,
-                Douleurs_abdominales=Douleurs_abdominales,
-                Epanchement_pleuralClinique= Epanchement_pleuralClinique,
-                AutreInfoClinique=AutreInfoClinique,
-            )
-        ########3-Information radiologique ### 
-            Opacités_nodulaires_pseudo_tumorales=form.cleaned_data["Opacités_nodulaires_pseudo_tumorales"]
-            Atteinte_pulmonaire_unilatérale_Droite=form.cleaned_data["Atteinte_pulmonaire_unilatérale_Droite"]
-            Atteinte_pulmonaire_unilatérale_Gauche=form.cleaned_data["Atteinte_pulmonaire_unilatérale_Gauche"]
-            Alvéolaire=form.cleaned_data["Alvéolaire"]
-            alveol_interstitielle=form.cleaned_data["alveol_interstitielle"]
-            Epanchement_pleuralRadiologique=form.cleaned_data["Epanchement_pleuralRadiologique"]
-            AutreInfoRadiologigue=form.cleaned_data["AutreInfoRadiologigue"]
-            
-            InfoRadiologique1=InfoRadiologique.objects.create(
-                Opacités_nodulaires_pseudo_tumorales=Opacités_nodulaires_pseudo_tumorales,
-                Atteinte_pulmonaire_unilatérale_Droite=Atteinte_pulmonaire_unilatérale_Droite,
-                Atteinte_pulmonaire_unilatérale_Gauche=Atteinte_pulmonaire_unilatérale_Gauche,
-                Alvéolaire=Alvéolaire,
-                alveol_interstitielle=alveol_interstitielle,
-                Epanchement_pleuralRadiologique=Epanchement_pleuralRadiologique,
-                AutreInfoRadiologigue=AutreInfoRadiologigue,
-            )
-        ########4-Information Biologique ### 
-            CRP=form.cleaned_data["CRP"]
-            Pro_calcitonine=form.cleaned_data["Pro_calcitonine"]
-            Albuminémie=form.cleaned_data["Albuminémie"]
-            Ferritine=form.cleaned_data["Ferritine"] 
-            Sélenium=form.cleaned_data["Sélenium"]
-            Phosphorémie=form.cleaned_data["Phosphorémie"]
-            Pao2=form.cleaned_data["Pao2"]
-            LDH=form.cleaned_data["LDH"]
-            Tx_de_Globules_blancs=form.cleaned_data["Tx_de_Globules_blancs"]
-            Tx_de_plaquettes =form.cleaned_data["Tx_de_plaquettes"]
-            Tx_de_lymphocytes =form.cleaned_data["Tx_de_lymphocytes"]
-            SGPT=form.cleaned_data["SGPT"]
-            SGOT=form.cleaned_data["SGOT"]
-            Bilirubine=form.cleaned_data["Bilirubine"]
-            Phosphatases_alcalines =form.cleaned_data["Phosphatases_alcalines"]
-            Urée=form.cleaned_data["Urée"]
-            Créatinémie=form.cleaned_data["Créatinémie"]
-            Natrémie=form.cleaned_data["Natrémie"]
-            Kaliémie=form.cleaned_data["Kaliémie"]
-            Proteinurie=form.cleaned_data["Proteinurie"]
-            Hématurie=form.cleaned_data["Hématurie"]
-            CPK=form.cleaned_data["CPK"]
-
-            InfoBiologique1=InfoBiologique.objects.create(
-                CRP=CRP,
-                Pro_calcitonine=Pro_calcitonine,
-                Albuminémie=Albuminémie,
-                Ferritine=Ferritine,
-                Sélenium=Sélenium,
-                Phosphorémie=Phosphorémie,
-                Pao2=Pao2,
-                LDH=LDH,
-                Tx_de_Globules_blancs=Tx_de_Globules_blancs,
-                Tx_de_plaquettes=Tx_de_plaquettes,
-                Tx_de_lymphocytes=Tx_de_lymphocytes,
-                SGPT=SGPT,
-                SGOT=SGOT,
-                Bilirubine=Bilirubine,
-                Phosphatases_alcalines=Phosphatases_alcalines,
-                Urée=Urée,
-                Créatinémie=Créatinémie,
-                Natrémie=Natrémie,
-                Kaliémie=Kaliémie,
-                Proteinurie=Proteinurie,
-                Hématurie=Hématurie,
-                CPK=CPK,
-                
-            )
+        
         ########5-Autre traitement recu ### 
             traitementEncours=form.cleaned_data["traitementEncours"]
             traitementAvantConsultation=form.cleaned_data["traitementAvantConsultation"]
@@ -391,25 +292,7 @@ def create(request):
 
          ########6-coordonner de quelquun sup ### 
             InfoSupDunEntourage=form.cleaned_data["InfoSupDunEntourage"]    
-        ########7-Question avec prelevement###   
-            Liquide_de_ponction_pleurale=form.cleaned_data["Liquide_de_ponction_pleurale"]
-            Crachats=form.cleaned_data["Crachats"]
-            Liquides_d_aspirations=form.cleaned_data["Liquides_d_aspirations"]
-            Lavage_broncho_pulmonaires=form.cleaned_data["Lavage_broncho_pulmonaires"]
-            Urines=form.cleaned_data["Urines"]
-            Sang=form.cleaned_data["Sang"]
-            AutrePrelevement=form.cleaned_data["AutrePrelevement"]
-
-            QuestionAvecPrelevement1=QuestionAvecPrelevement.objects.create(
-                Liquide_de_ponction_pleurale=Liquide_de_ponction_pleurale,
-                Crachats=Crachats,
-                Liquides_d_aspirations=Liquides_d_aspirations,
-                Lavage_broncho_pulmonaires=Lavage_broncho_pulmonaires,
-                Urines=Urines,
-                Sang=Sang,
-                AutrePrelevement=AutrePrelevement,
-            )
-
+        
 
 
               
@@ -421,18 +304,16 @@ def create(request):
                 Date_Introduction=Date_Introduction,
                 patientvu=patientvu,
                 identitePatient=patient,
-                medecin=User.objects.get(username=request.user),
+                medecin=medecin,
                 etatDuPatient=etatDuPatient,
                 DiagnosticDepathologiChronique=DiagnosticDepathologiChronique,
                 SipathologieChroniqueAso=SipathologieChroniqueAso,
                 facteurRisque=facteurRisque1,
                 Therapieimmunosuppressiveencours=Therapieimmunosuppressiveencours1,
-                InfoClinique=InfoClinique1,
-                InfoRadiologique=InfoRadiologique1,
-                InfoBiologique=InfoBiologique1,
+               
                 traitementRecu=traitementRecu1,
                 InfoSupDunEntourage=InfoSupDunEntourage,
-                QuestionAvecPrelevement=QuestionAvecPrelevement1,
+           
 
             )    
         else:

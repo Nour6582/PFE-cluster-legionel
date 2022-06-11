@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% block  content %}
+ 
+    <P>Nom: {{ Patient.Nom}}</p>
+  
+    <p>Preom: {{ Patient.Prenom}}</p>
+
+    <p> Matricule : {{ Patient.Email}}</p>
+
+    <a href=" {% url  'patient:UpdatePatient'  Patient.pk %} ">Update Patient</a>
+
+    <P> <a href=" {% url  'patient:MailPatient'  Patient.pk %} ">mail update Patient</a></P>
+ {% if Patient.InfoClinique %}
+ {% else%}
+ <P><a href=" {% url  'patient:InfoClinique'  Patient.pk %} ">Ajout Des Informations Clinique</a></P>
+ {% endif %}
+{% if Patient.InfoRadiologique %}
+ {% else%}
+ <P><a href=" {% url  'patient:InfoRadiologique'  Patient.pk %} ">Ajout Des InfoRadiologique</a></P>
+ {% endif %}
+ {% if Patient.InfoBiologique %}
+ {% else%}
+<P><a href=" {% url  'patient:InfoBiologique'  Patient.pk %} ">Ajout Des InfoBiologique</a></P>
+ {% endif %}
+ {% if Patient.QuestionAvecPrelevement %}
+ {% else%}
+  <P><a href=" {% url  'patient:QuestionAvecPrelevement'  Patient.pk %} ">Question Avec Prelevement</a></P>
+ {% endif %}
+        
+{% endblock content %}

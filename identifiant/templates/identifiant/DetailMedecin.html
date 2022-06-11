@@ -1,14 +1,14 @@
 {% extends "base.html" %}
 {% block  content %}
  
-<ul>
+    <P>Nom: {{ med.last_name}}</p>
   
-    <li>{{ Medecin.Nom}}</li>
-    <li>{{ Medecin.Prénom }}</li>
-    <li> {{ Medecin.NomUser}}</li>
-</ul
+    <p>Preom: {{ med.first_name }}</p>
 
-<p>	<a href=" {% url  'identifiant:ValiderMedecin'  Medecin.id %} ">Valider</a></p>
+    <p> Matricule : {{ med.nomUser}}</p>
 
-<p>	<a href=" {% url  'identifiant:DeleteMedecin'  Medecin.id %} ">Supprimer</a></p>
+{% if med.is_attente %}
+<p>	<a href=" {% url  'identifiant:ValiderMedecin'  med.id %} ">Valider</a></p>
+{% endif %}
+<p>	<a href=" {% url  'identifiant:DeleteMedecin'  med.id %} ">Supprimer</a></p>
 {% endblock content %}

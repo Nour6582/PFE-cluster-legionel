@@ -6,7 +6,8 @@
 	{% else %}
 	<p>
 		{% if elt.is_attente %}
-		<a href=" {% url  'identifiant:DetailMedecin'  elt.id %} "><ol>{{elt}}</ol></a>
+		<p><a href=" {% url  'identifiant:DetailMedecin'  elt.id %} ">{{elt}}</a> Joined on: {{elt.date_joined}}</p>
+		
 		{% endif %}
 	</p>
 	{% endif %}
@@ -18,7 +19,8 @@
 	{% else %}
 	<p>
 		{% if elt.is_Medecin %}
-		<a href=" {% url  'identifiant:DetailMedecin'  elt.id %} "><ol>{{elt}}</ol></a>
+		<p><a href=" {% url  'identifiant:DetailMedecin'  elt.id %} ">{{elt}}</a> Joined on: {{elt.date_joined}}</p>
+		
 		{% endif %}
 	</p>
 	{% endif %}

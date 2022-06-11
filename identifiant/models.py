@@ -1,5 +1,6 @@
 
 from ast import mod
+from calendar import c
 from platform import mac_ver
 from re import L
 from turtle import back
@@ -14,9 +15,9 @@ class User(AbstractUser):
     telPortable=models.IntegerField(('Tel portable'),blank=True,null=True)
     fax=models.IntegerField(blank=True,null=True)
     nomUser=models.CharField(max_length=30,blank=True,unique=True,null=True)
+    #lieu_residence=models.ForeignKey("lieu",blank=True,on_delete=models.SET_NULL,null=True)
     is_attente=models.BooleanField(default=True)
     is_Medecin=models.BooleanField(default=False)
-    is_admin=models.BooleanField(default=False)
     def __str__(self):
         return self.username
 
@@ -79,7 +80,8 @@ class lieu(models.Model):
     wilaya=models.CharField(max_length=100)
     Daira=models.CharField(max_length=100)
     Commune=models.CharField(max_length=100)
-    
+    def __str__(self):
+        return  f"{self.wilaya} {self.Daira} {self.Commune}"
 
 class adresseResidence(models.Model):
     NumRue=models.IntegerField(("Numero de la Rue"))
@@ -108,9 +110,17 @@ class identitePatient(models.Model):
     Tel=models.IntegerField()
     fax=models.IntegerField()
     Email=models.EmailField(blank=True)
+
     ResidencePermanent=models.ForeignKey("adresseResidence",on_delete=models.SET_NULL,null=True)
+    InfoClinique=models.OneToOneField("InfoClinique",on_delete=models.SET_NULL,null=True,blank=True)
+    InfoRadiologique=models.OneToOneField("InfoRadiologique",on_delete=models.SET_NULL,null=True,blank=True)
+    InfoBiologique=models.OneToOneField("InfoBiologique",on_delete=models.SET_NULL,null=True,blank=True)
+    
+    QuestionAvecPrelevement=models.OneToOneField("QuestionAvecPrelevement",on_delete=models.SET_NULL,null=True,blank=True)
+    userprofile=models.ForeignKey("UserProfile",on_delete=models.CASCADE)
     def __str__(self):
-        return self.Prenom
+        return  f"{self.Nom} {self.Prenom} {self.Tel} {self.Email}"
+  
  
 ##
 #
@@ -161,14 +171,13 @@ class formulaire(models.Model):
     #Si Thérapie immunosuppressive en cours, préciser
     Therapieimmunosuppressiveencours=models.ForeignKey("Therapieimmunosuppressiveencours",on_delete=models.SET_NULL,null=True)
     #Informations cliniques des le début de la Maladie c.-à-d. l’infection respiratoire basse (cocher uniquement ce qui vous correspond): 
-    InfoClinique=models.OneToOneField("InfoClinique",on_delete=models.SET_NULL,null=True)
-    InfoRadiologique=models.OneToOneField("InfoRadiologique",on_delete=models.SET_NULL,null=True)
-    InfoBiologique=models.OneToOneField("InfoBiologique",on_delete=models.SET_NULL,null=True)
-    traitementRecu=models.OneToOneField("traitementRecu",on_delete=models.SET_NULL,null=True)
+    ###traitement recu avant
+    traitementRecu=models.OneToOneField("traitementRecu",on_delete=models.SET_NULL,null=True,blank=True)
     InfoSupDunEntourage=models.CharField(max_length=995555,blank=True)
-    QuestionAvecPrelevement=models.OneToOneField("QuestionAvecPrelevement",on_delete=models.SET_NULL,null=True,blank=True)
-
-
+    
+    #le profile qui est lier a uncompte
+    #IntroduitPar = models.ForeignKey(UserProfile,on_delete=models.CASCADE) 
+    
 
 ####information sur etat du patient au moment de lintroduction du questionnaire
 

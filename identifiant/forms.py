@@ -16,15 +16,30 @@ class updateUsermodelForm(forms.ModelForm):
     class Meta:
         model=User
         fields=(
-             'nomUser',
+             'username',
         )
 
 ########for registration
 class SignupForm(UserCreationForm):
+
     class Meta(UserCreationForm.Meta):
         model = get_user_model()
-        fields = ('username', 'email', 'first_name', 'last_name', 'nomUser','telPortable','fax')
+        fields = ('username',
+         'email',
+          'first_name',
+           'last_name', 
+           'spécialité',
+           'telPortable',
+           'fax',
+           'typeIntroducteur',
+           'Wilaya','Daira','Commune', 
+           'NumLicenceMedecin',
+    'NumLicenceResponsable',
+    'Num_Autorisation',
+    'Nom_laboHopital',
+    )
 
+###########Chercher un patient pour 
 
 
 choixlieu= ( 
@@ -62,6 +77,7 @@ Reponse =(
         ('Je ne sais pas','Je ne sais pas'),
 )
 
+
 class createform(forms.Form):
     Date_Introduction=forms.DateField(label='  Date d’introduction du questionnaire ',widget=forms.SelectDateWidget(years=(range(2022, 1900, -1))))
     patientvu=forms.ChoiceField(label='Patient ( e ) vu ( e )',choices=choixlieu)
@@ -91,7 +107,7 @@ class createform(forms.Form):
     #adresse de residence permanente du patient
     NumRue=forms.IntegerField(label="Numero de la Rue")
     NomRue=forms.CharField(label="Nom de la Rue",max_length=100)
-    CodePostal=forms.IntegerField(label="Code Postal")
+    CodePostal=forms.IntegerField(label="Code Postal",required=False)
     NumBoitePostal=forms.IntegerField(label="Numero de la boite  postale ( si c’est la cas) ",required=False)
     NumBattiment=forms.IntegerField(label="Numéro de la maison ou du bâtiment ")
     NumAppartement=forms.IntegerField(label="Numéro de l’appartement, si c’est le cas ",required=False)
@@ -133,8 +149,9 @@ class createform(forms.Form):
     AutreTraitementimmunosuppresseur=forms.CharField(label="si autre traitement immunosuppresseur que cité précédemment, le préciser :", max_length=8484,widget=forms.Textarea,required=False)
     #quelun sup coordoonners
     InfoSupDunEntourage=forms.CharField(label=" Connaissez-vous une personne ou plus, de votre entourage familial et/ou professionnel et/ou social (amis,..) qui a /ont les mêmes  symptômes que vous ? Si oui, préciser l’identité de cette/ces personnes et leurs coordonnées",widget=forms.Textarea,required=False)
-    
+    #############sign up d'un compte ########
+    #Cas confirmé : au moins un des signes
 
+   
+        
     
-        
-        

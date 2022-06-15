@@ -1,3 +1,4 @@
+from urllib import request
 from django.shortcuts import render
 from identifiant.models import *
 from identifiant.forms import *
@@ -9,6 +10,8 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib import messages 
 from django.urls import reverse
 from django.shortcuts import render,redirect
+from django.http import HttpResponse
+from django.template import loader
 
 # Create your views here.
 
@@ -29,40 +32,13 @@ class ListPatient(LoginRequiredMixin,ListView):
 class UpdatePatient(LoginRequiredMixin,UpdateView):
     template_name="patient/UpdatePatient.html"
     queryset=identitePatient.objects.all()
+   
     form_class=updatePatientmodelForm
     def get_success_url(self):
         return reverse("patient:ListPatient")
 ######## Enregistrer le mail
-def mail(request,pk):
-    form=createMailform()
-    if request.method=="POST":
-        form=createMailform(request.POST)
-        
-        if form.is_valid():
-            print("le form est ausi valide") 
-            mail=form.cleaned_data['mail']
-           
-           # medecin=User.objects.get(username=request.user),
-            patient=identitePatient.objects.get(id=pk)
-          
-            patient.Email=mail
-            patient.save()
-        else:
-            print ("form is invalid")
-            print(form.errors.as_data())    
-            ####adresse permanent
-            messages.error(request, "Error")
-            context={
-        "form":createMailform()
-                 }
-            return render(request,"patient/mailform.html",context)            
-        return redirect("/patient/ListPatient/")
-    context={
-        "form":createMailform()
-    }
-    return render(request,"patient/mailform.html",context)  
 
-
+         
   #########Information clinique
 def InfoCliniqueform(request,pk):
     form=InfoCliniqueForm()
@@ -127,13 +103,23 @@ def InfoCliniqueform(request,pk):
         "form":InfoCliniqueForm()
                  }
             return render(request,"patient/mailform.html",context)  
-        return redirect("/patient/ListPatient/")
+        return redirect("/patient/"+str(pk))
     context={
         "form":InfoCliniqueForm()
     }
     return render(request,"patient/mailform.html",context)  
+##############UPDATE LES INFORMATIONS CLINIQUE
+class UpdateInfoClinique(LoginRequiredMixin,UpdateView):
+    template_name="patient/UpdatePatient.html"
+    queryset=InfoClinique.objects.all()
+   
+    form_class=InfoCliniqueForm
+    def get_success_url(self):
+        r=self.request.user
+        print(r)
+        return reverse("patient:ListPatient")  
+          
 ########Information radiologique
-
 def InfoRadiologiqueform(request,pk):
     form=InfoRadiologiqueForm()
     if request.method=="POST":
@@ -169,11 +155,22 @@ def InfoRadiologiqueform(request,pk):
         "form":InfoRadiologiqueForm()
                  }
             return render(request,"patient/mailform.html",context)  
-        return redirect("/patient/ListPatient/")
+        return redirect("/patient/"+str(pk))
     context={
         "form":InfoRadiologiqueForm()
     }
     return render(request,"patient/mailform.html",context)  
+
+
+    ##############UPDATE LES INFORMATIONS radiologique
+class UpdateInfoRadiologique(LoginRequiredMixin,UpdateView):
+    template_name="patient/UpdatePatient.html"
+    queryset=InfoRadiologique.objects.all()
+    form_class=InfoRadiologiqueForm
+    def get_success_url(self):
+        return reverse("patient:ListPatient")  
+
+         
 ###########info biologique
 
 def InfoBiologiqueform(request,pk):
@@ -244,13 +241,21 @@ def InfoBiologiqueform(request,pk):
         "form":InfoBiologiqueForm()
                  }
             return render(request,"patient/mailform.html",context)  
-        return redirect("/patient/ListPatient/")
+        return redirect("/patient/"+str(pk))
     context={
         "form":InfoBiologiqueForm()
     }
     return render(request,"patient/mailform.html",context)      
 
+##############UPDATE LES INFORMATIONS biologique
 
+class UpdateInfoBiologique(LoginRequiredMixin,UpdateView):
+    template_name="patient/UpdatePatient.html"
+    queryset=InfoBiologique.objects.all()
+    form_class=InfoBiologiqueForm
+  
+    def get_success_url(self):
+        return reverse("patient:ListPatient")    
 #### QuestionAvecPrelevementForm
 def QuestionAvecPrelevementform(request,pk):
     form=QuestionAvecPrelevementForm()
@@ -288,10 +293,103 @@ def QuestionAvecPrelevementform(request,pk):
         "form":QuestionAvecPrelevementForm()
                  }
             return render(request,"patient/mailform.html",context)  
-        return redirect("/patient/ListPatient/")
+        return redirect("/patient/"+str(pk))
     context={
         "form":QuestionAvecPrelevementForm()
     }
-    return render(request,"patient/mailform.html",context)      
+    return render(request,"patient/mailform.html",context)    
+    ##############UPDATE LES INFORMATIONS question avec prelevement
+class UpdateQuestionAvecPrelevement(LoginRequiredMixin,UpdateView):
+    template_name="patient/UpdatePatient.html"
+    queryset=QuestionAvecPrelevement.objects.all()
+    
+    form_class=QuestionAvecPrelevementForm
+    def get_success_url(self):
+        return reverse("patient:ListPatient") 
+      
 
+############Exple 
+def casMaladeform(request,pk):
+    form=casMaladeForm()
+    if request.method=="POST":
+        form=casMaladeForm(request.POST)        
+        if form.is_valid():
+            print("la form est ausi valide")  
+              
+            casconfirm=form.cleaned_data['casconfirme']
+            casprobabl=form.cleaned_data['casprobable']
+            patient=identitePatient.objects.get(id=pk)
+            id=pk
+            if casconfirm:
+                patient.casmalade='Confirmé'
+            elif casprobabl:
+                patient.casmalade='Probable'
+            else:
+                patient.casmalade='Negatif'   
+    
+            # Associer au patient
+            
+           
+            patient.save() 
+        else:
+            print ("form is invalid")
+            
+            print(form.errors.as_data())    
+            ####adresse permanent
+            messages.error(request, "Error")
+            context={
+        "form":casMaladeForm()
+                 }
+            return render(request,"patient/mailform.html",context) 
        
+        return redirect("/patient/"+str(pk))
+        
+    context={
+        "form":casMaladeForm()
+    }
+    return render(request,"patient/mailform.html",context)  
+############Cherche le patient pour le compte du centre radiologique et du laboratoire biologique
+def search(request):
+    form=searchForm()
+    if request.method=="POST":
+        form=searchForm(request.POST)        
+        if form.is_valid():
+            print("la form est ausi valide")  
+    
+            Nom=form.cleaned_data['Nom']
+            NomMarital=form.cleaned_data['NomMarital']
+            Prenom=form.cleaned_data['Prenom']
+            Patient=identitePatient.objects.filter(Nom=Nom,NomMarital=NomMarital,Prenom=Prenom)
+            if not Patient:
+                message="Pas de patient avec ce nom et prenom"
+            else:
+                message="voici la liste des patients trouve sous ce nom"    
+           
+            context={
+               'Patient':Patient,
+               'message':message,
+                 }
+            print(Patient)
+            #template = loader.get_template('patient/ListPatient.html')
+            #return HttpResponse(template.render(context, request=request))
+            
+           # patient.save() 
+        else:
+            print ("form is invalid")
+            
+            print(form.errors.as_data())    
+            ####adresse permanent
+            messages.error(request, "Error")
+            context={
+        "form":searchForm()
+                 }
+            return render(request,"patient/mailform.html",context) 
+       
+        #return redirect("/patient/"+str(patient.id))
+        return render(request,"patient/ListPatient.html",context)
+
+        
+    context={
+        "form":searchForm()
+    }
+    return render(request,"patient/mailform.html",context)  

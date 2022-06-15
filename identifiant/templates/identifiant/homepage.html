@@ -4,9 +4,17 @@
 <p>Bienvenue dans la page d'accueil de l'alerte du cluster </p>
 
 {% if request.user.is_authenticated %}
-<p>	<a href={% url 'identifiant:create' %}> Remplir le formulaire </a></p>
 
-<p>	<a href={% url 'patient:ListPatient' %}> Voir la Listes des Patient </a></p>
+
+
+    {% if request.user.typeIntroducteur == 'laboratoire biologique' or request.user.typeIntroducteur == 'centre radiologique' %}
+        <p>	<a href={% url 'patient:search' %}> Chercher un patient </a></p>
+    {% endif %}
+        <p>	<a href={% url 'identifiant:create' %}> ajouter un patient </a></p>
+
+        <p>	<a href={% url 'patient:ListPatient' %}> Voir la Listes des Patient </a></p>
+   
+
 {% endif %}
 
 {% endblock %}

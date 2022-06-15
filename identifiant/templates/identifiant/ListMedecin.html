@@ -5,7 +5,9 @@
     {% if elt.is_superuser  %}
 	{% else %}
 	<p>
-		{% if elt.is_attente %}
+		{% if elt.is_valide %}
+		
+		{% else %}
 		<p><a href=" {% url  'identifiant:DetailMedecin'  elt.id %} ">{{elt}}</a> Joined on: {{elt.date_joined}}</p>
 		
 		{% endif %}
@@ -18,8 +20,8 @@
     {% if elt.is_superuser  %}
 	{% else %}
 	<p>
-		{% if elt.is_Medecin %}
-		<p><a href=" {% url  'identifiant:DetailMedecin'  elt.id %} ">{{elt}}</a> Joined on: {{elt.date_joined}}</p>
+		{% if elt.is_valide %}
+		<p><a href=" {% url  'identifiant:DetailMedecin'  elt.id %} ">{{elt}}</a> {{elt.typeIntroducteur}}  Joined on: {{elt.date_joined}}</p>
 		
 		{% endif %}
 	</p>

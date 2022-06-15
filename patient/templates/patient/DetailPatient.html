@@ -6,25 +6,44 @@
     <p>Preom: {{ Patient.Prenom}}</p>
 
     <p> Matricule : {{ Patient.Email}}</p>
+ {% if request.user.typeIntroducteur != 'laboratoire biologique' and request.user.typeIntroducteur != 'centre radiologique' %}
+        <a href=" {% url  'patient:UpdatePatient'  Patient.pk %} ">Update Patient</a>
 
-    <a href=" {% url  'patient:UpdatePatient'  Patient.pk %} ">Update Patient</a>
-
-    <P> <a href=" {% url  'patient:MailPatient'  Patient.pk %} ">mail update Patient</a></P>
- {% if Patient.InfoClinique %}
- {% else%}
- <P><a href=" {% url  'patient:InfoClinique'  Patient.pk %} ">Ajout Des Informations Clinique</a></P>
- {% endif %}
-{% if Patient.InfoRadiologique %}
- {% else%}
- <P><a href=" {% url  'patient:InfoRadiologique'  Patient.pk %} ">Ajout Des InfoRadiologique</a></P>
- {% endif %}
- {% if Patient.InfoBiologique %}
- {% else%}
-<P><a href=" {% url  'patient:InfoBiologique'  Patient.pk %} ">Ajout Des InfoBiologique</a></P>
- {% endif %}
- {% if Patient.QuestionAvecPrelevement %}
- {% else%}
-  <P><a href=" {% url  'patient:QuestionAvecPrelevement'  Patient.pk %} ">Question Avec Prelevement</a></P>
- {% endif %}
         
+    {% if Patient.InfoClinique %}
+
+    <P><a href=" {% url  'patient:UpdateInfoClinique'  Patient.pk %} ">Update Des Informations Clinique</a></P>
+    {% else%}
+    <P><a href=" {% url  'patient:InfoClinique'  Patient.pk %} ">Ajout Des Informations Clinique</a></P>
+    {% endif %}
+
+
+
+    {% if Patient.QuestionAvecPrelevement %}
+    <P><a href=" {% url  'patient:UpdateQuestionAvecPrelevement'  Patient.pk %} ">update des Question Avec Prelevement</a></P>
+    {% else%}
+    <P><a href=" {% url  'patient:QuestionAvecPrelevement'  Patient.pk %} ">Question Avec Prelevement</a></P>
+    {% endif %}
+    {% if not Patient.casmalade %} <P><a href=" {% url  'patient:casMalade'  Patient.pk %} ">Definir si c'est un cas positif ou negatif</a></P>  {% endif %}
+{% endif %}
+ 
+   {% if request.user.typeIntroducteur != 'laboratoire biologique' %}    
+        {% if Patient.InfoRadiologique %}
+        <P><a href=" {% url  'patient:UpdateInfoRadiologique'  Patient.pk %} ">Updates Des InfoRadiologique</a></P>
+        {% else%}
+        <P><a href=" {% url  'patient:InfoRadiologique'  Patient.pk %} ">Ajout Des InfoRadiologique</a></P>
+        {% endif %}
+    {% endif %}  
+    {% if request.user.typeIntroducteur != 'centre radiologique' %}  
+        {% if Patient.InfoBiologique %}
+        <P><a href=" {% url  'patient:UpdateInfoBiologique'  Patient.pk %} ">Update Des InfoBiologique</a></P>
+        {% else%}
+        <P><a href=" {% url  'patient:InfoBiologique'  Patient.pk %} ">Ajout Des InfoBiologique</a></P>
+        {% endif %}
+   {% endif %}
+
+
+
+
+       
 {% endblock content %}

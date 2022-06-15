@@ -28,6 +28,18 @@ def signup(request):
             return redirect(settings.LOGIN_REDIRECT_URL)
     return render(request, 'registration/signup.html', context={'form': form})
 
+def signup2(request):
+    form = SignupForm()
+    if request.method == 'POST':
+        form = SignupForm(request.POST)
+        if form.is_valid():
+            user = form.save()
+            # auto-login user
+            login(request, user)
+            return redirect("/identifiant/createLabo")
+    return render(request, 'registration/signup.html', context={'form': form})
+
+
 
 
 
@@ -54,13 +66,17 @@ class DeleteMedecin(LoginRequiredMixin,DeleteView):
     template_name="identifiant/DeleteMedecin.html"
     queryset=User.objects.all()
     context_object_name="Medecin" 
+    
     def get_success_url(self) :
-        return reverse("identifiant:ListMedecin")
+        if (self.request.user.is_superuser):
+            return reverse("identifiant:ListMedecin")
+        else:
+            return reverse("identifiant:homepage")
+
 ######validateMedecin
 def ValiderMedecin(request,pk):
     Medecin=User.objects.get(id=pk)
-    Medecin.is_Medecin=True
-    Medecin.is_attente=False
+    Medecin.is_valide=True
     Medecin.save()
     return redirect("identifiant:ListMedecin")
         
@@ -156,10 +172,9 @@ def create(request):
 #            userprofile=self.request.user.userprofile
 #        return identitePatient.objects.filter(userprofile=userprofile) 
            ####medecin introducteur d'info
-
-            medecin1=User.objects.get(username=request.user),
-
-            medecin=medecin1[0]
+            
+            med=User.objects.filter(username=request.user.username).first(),
+            medecin=med[0]
             patient=identitePatient.objects.create(
                 Nom=Nom,
                 NomMarital=NomMarital,
@@ -220,7 +235,7 @@ def create(request):
                 Tabac=''  
 
 
-
+                
             facRisque=facteurRisque.objects.filter(
                 GreffedeMoelleosseuse=GreffedeMoelleosseuse,
                 Greffederein=Greffederein,

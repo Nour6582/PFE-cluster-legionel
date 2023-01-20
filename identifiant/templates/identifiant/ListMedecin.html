@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% block  content %}
+<p>Medecin en Attente de Validation</p>
+{% for elt in Medecin %}
+    {% if elt.is_superuser  %}
+	{% else %}
+	<p>
+		{% if elt.is_valide %}
+		
+		{% else %}
+		<p><a href=" {% url  'identifiant:DetailMedecin'  elt.id %} ">{{elt}}</a> Joined on: {{elt.date_joined}}</p>
+		
+		{% endif %}
+	</p>
+	{% endif %}
+{% endfor %}
+<hr>
+<p>Medecin Validé</p>
+{% for elt in Medecin %}
+    {% if elt.is_superuser  %}
+	{% else %}
+	<p>
+		{% if elt.is_valide %}
+		<p><a href=" {% url  'identifiant:DetailMedecin'  elt.id %} ">{{elt}}</a> {{elt.typeIntroducteur}}  Joined on: {{elt.date_joined}}</p>
+		
+		{% endif %}
+	</p>
+	{% endif %}
+{% endfor %}
+{% endblock content %}

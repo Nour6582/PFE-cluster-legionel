@@ -1,0 +1,79 @@
+{% load static %}
+{% load widget_tweaks %} 
+{%  block content%}
+<html lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="description" content="">
+	<meta name="author" content="">
+	<link href="{% static 'css/style2.css' %}" rel="stylesheet">
+	<link rel="stylesheet" type="text/css" href="{% static 'css/opensans-font.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'fonts/material-design-iconic-font/css/material-design-iconic-font.min.css' %}">
+	<!-- datepicker -->
+	<link rel="stylesheet" type="text/css" href="{% static 'css/jquery-ui.min.css' %}">
+	<!-- Main Style Css -->
+    <title>Connexion</title>
+</head>
+<body>
+    <div class="page-content" style="height: 100%;">
+		<div class="wizard-heading">Login Form</div>
+		<div class="wizard-v6-content">
+			<div class="wizard-form">
+		        <form class="form-register" id="form-register"    method="post">
+
+		        	{% csrf_token %}
+					
+					
+					<div id="form-total">
+			            <section>
+			                <div class="inner" style="margin-top: 50px; margin-left: 50px; margin-right: 50px; margin-bottom: 50px;">
+								<div class="form-row">
+									<div class="form-holder form-holder-2">
+										<label class="form-row-inner" for="id_username">
+											
+											<input type="text" name="username" maxlength="150" autocapitalize="none" autofocus="" class="form-control" required="" id="id_username">		
+											<span class="label">Username</span>
+										</label>
+									</div>
+								</div>
+
+								<div class="form-row">
+									<div class="form-holder form-holder-2">
+										<label class="form-row-inner" for="id_password">
+											
+											<input type="password" name="password" autocomplete="new-password" class="form-control" required="" id="id_password" aria-autocomplete="list">
+											<span class="label">Mot de passe</span>
+										</label>
+									</div>
+								</div>
+<center>
+    <button type="submit"  class="btn btn-theme pull-left" style=" background-color:#55e8d5; height:40px; border-color: #55e8d5; width: 120px; color: #fff; font-size: 17px; font-weight: 100; letter-spacing: 2px;">Connexion</button>
+
+</center>
+<center>
+    <p style="color: #fff; font-weight: 100px; font-size: 15px; letter-spacing: 1px;">Don't have an account?</p>
+</center>
+<center>
+	
+	<a href={% url 'identifiant:signup' %}> <input value="sign Up"  class="btn btn-theme pull-left" style=" background-color:transparent; height:40px; border-color: #55e8d5; width: 120px; color: #fff; font-size: 17px; font-weight: 100; text-align: center;" ></a>
+    
+  
+</center>
+			            </section>
+		        	</div>
+					
+		        </form>
+			</div>
+		</div>
+	</div>
+
+	<script src="{% static 'js/jquery-3.3.1.min.js' %}"></script>
+	<script src="{% static 'js/jquery.steps.js' %}"></script>
+	<script src="{% static 'js/jquery-ui.min.js' %}"></script>
+	<script src="{% static 'js/main.js' %}"></script>
+</body>
+</html>
+ {% endblock content %}
+
+
+

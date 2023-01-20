@@ -1,0 +1,12 @@
+ {% extends "base.html" %}
+{% block  content %}
+
+ <h1>do you want to delete  {{Medecin.username}} ? </h1>
+
+<form method="POST">
+  {% csrf_token %}
+  {{createForm.as_p}}<!---comme paragraphe ya un attribue as_p -->
+ <button type="submit">submit</button>
+ </form>
+
+{% endblock content %}

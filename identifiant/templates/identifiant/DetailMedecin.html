@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% block  content %}
+
+    <P>Nom: {{ med.last_name}}</p>
+    <p>Preom: {{ med.first_name }}</p>
+    <p> Numero de licence du medecin: {{ med.NumLicenceMedecin}}</p>
+    <p> Type du compte : {{ med.typeIntroducteur}}</p>
+    
+ {% if request.user.is_superuser  %} 
+{% if med.is_valide %}
+{% else %}
+<p>	<a href=" {% url  'identifiant:ValiderMedecin'  med.id %} ">Valider</a></p>
+{% endif %}
+{% endif %}
+
+<p>	<a href=" {% url  'identifiant:DeleteMedecin'  med.id %} ">Supprimer</a></p>
+
+{% endblock content %}

@@ -1,0 +1,262 @@
+{% load static %}
+<!DOCTYPE HTML>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+	<title>Médecin</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="description" content="">
+	<meta name="author" content="">
+	<link href="{% static 'css/bootstrap-responsive.css' %}" rel="stylesheet">
+	<link href="{% static 'css/style.css' %}" rel="stylesheet">
+	<link href="{% static 'color/default.css' %}" rel="stylesheet">
+	<link rel="shortcut icon" href="img/favicon.ico">
+	<!-- =======================================================
+    Theme Name: Maxim
+    Theme URL: https://bootstrapmade.com/maxim-free-onepage-bootstrap-theme/
+    Author: BootstrapMade.com
+    Author URL: https://bootstrapmade.com
+	======================================================= -->
+</head>
+
+<body>
+	<!-- navbar -->
+	<div class="navbar-wrapper">
+		<div class="navbar navbar-inverse navbar-fixed-top">
+			<div class="navbar-inner">
+				<div class="container">
+					<!-- Responsive navbar -->
+					<a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse"><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span>
+				</a>
+					<h1 class="brand"><a href="index.html">Legionella - Finder</a></h1>
+					<!-- navigation -->
+					<nav class="pull-right nav-collapse collapse">
+						<ul id="menu-main" class="nav">
+							<li><a title="team" href={% url 'monindex' %} >Home</a></li>
+							{% if request.user.is_superuser  %}
+								<li><a href={% url 'identifiant:ListMedecin' %}> listes des Medecin </a></li>        
+							{% endif %}   
+							<li><a  href={% url 'identifiant:logout' %}>Déconnexion</a></li>
+						</ul>
+					</nav>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- Header area -->
+    <section id="blog" class="section">
+        		
+		<div class="container">
+			<h4>Medecin en attente de validation</h4>
+
+
+
+			
+		   
+			<!-- Three columns -->
+			<div class="row">
+				<div class="span3" style="width: 100%;">
+					<div class="home-post">
+							<table>
+                                <tr class="post-meta" style="height: 60px; font-size: 18px; letter-spacing: 1px;">
+                                    <th style="width:6% ;">Type de compte</th>
+                                    <th style="width:14% ;">Date Joined</th>
+                                    <th style="width:14% ;">First Name</th>
+                                    <th style="width:14% ;">Last Name</th>
+                                    
+                                    <th style="width:14% ;">Numero de licence du medecin:</th>
+                                    <th style="width:14% ;">E-mail</th>
+                                    <th style="width:16% ;">Actions</th>
+                                </tr>
+										
+
+                                {% for elt in Medecin %}
+                                    {% if elt.is_superuser  %}
+                                    {% else %}
+                                        {% if not elt.is_valide %}
+
+                                                <tr class="entry-content" style="height: 50px;">
+                                                
+
+                                                    <td style="width:6% ; text-align: center;"> {{ elt.typeIntroducteur}}</td>
+                                                    
+                                                    <td style="width:14% ; text-align: center;">{{elt.date_joined}}</td>
+
+                                                    <td style="width:14% ; text-align: center;">{{ elt.first_name }}</td>
+                                                    
+                                                    <td style="width:14% ; text-align: center;">{{ elt.last_name}}</td>
+                                            
+                                                    <td style="width:14% ; text-align: center;">{{ elt.NumLicenceMedecin}}</td>
+                                                    <td style="width:14% ; text-align: center; padding-right: 5px;">{{elt.Email}}</td>
+                                                    <td style="width:16% ; padding-left: 5px;">
+                                                    <center>
+                                                        <table>
+                                                            
+                                                            <td style="padding: 5px;">  <a href=" {% url  'identifiant:DeleteMedecin'  elt.id %} "> <input value="Delete" class="" style=" background-color:#A01E19; height:30px; border-color: #A01E19; width: 100px; color: #fff; font-size: 17px; font-weight: 100; text-align: center; letter-spacing: 1px;" ></a></td>
+                                                            
+                                                            <td style="padding: 5px;">  <a href=" {% url  'identifiant:ValiderMedecin'  elt.id %} "><input value="Valider" class="" style=" background-color:#3A3F3E; height:30px; border-color: #3A3F3E; width: 100px; color: #fff; font-size: 17px; font-weight: 100; text-align: center; letter-spacing: 1px;" > </a> </td> 
+                                                            
+                                                            <td style="padding: 5px;">  <a href=" {% url  'identifiant:DetailMedecin'  elt.id %} "><input value="Details" class="" style=" background-color:#3A3F3E; height:30px; border-color: #3A3F3E; width: 100px; color: #fff; font-size: 17px; font-weight: 100; text-align: center; letter-spacing: 1px;" > </a> </td> 
+															                                                                                        
+                                                        </tr>
+                                                        </table>
+                                                    </center>
+                                                    </td>
+                                                </tr>
+                                        {% endif %}              
+                                        
+                                    {% endif %}         
+								
+                                {% endfor %}     
+												
+
+                            </table>
+                                                    
+                            
+                              
+                                    
+                                    
+						
+						</div>
+				</div>
+			</div>
+			<div class="blankdivider30"></div>
+
+			<div class="aligncenter">
+
+				<!--<a    href=" {% url 'formulaire' %}" class="btn btn-large btn-theme">Add patient</a>-->
+			</div>
+		</div>
+
+		
+				
+		<div class="container">
+			<h4>Medecin validé</h4>
+
+
+
+			
+		   
+			<!-- Three columns -->
+			<div class="row">
+				<div class="span3" style="width: 100%;">
+					<div class="home-post">
+							<table>
+                                <tr class="post-meta" style="height: 60px; font-size: 18px; letter-spacing: 1px;">
+                                    <th style="width:6% ;">Type de compte</th>
+                                    <th style="width:14% ;">Date Joined</th>
+                                    <th style="width:14% ;">First Name</th>
+                                    <th style="width:14% ;">Last Name</th>
+                                    
+                                    <th style="width:14% ;">Numero de licence du medecin:</th>
+                                    <th style="width:14% ;">E-mail</th>
+                                    <th style="width:16% ;">Actions</th>
+                                </tr>
+										
+
+                                {% for elt in Medecin %}
+                                    {% if elt.is_superuser  %}
+                                    {% else %}
+                                        {% if elt.is_valide %}
+
+                                                <tr class="entry-content" style="height: 50px;">
+                                                
+
+                                                    <td style="width:6% ; text-align: center;"> {{ elt.typeIntroducteur}}</td>
+                                                    
+                                                    <td style="width:14% ; text-align: center;">{{elt.date_joined}}</td>
+
+                                                    <td style="width:14% ; text-align: center;">{{ elt.first_name }}</td>
+                                                    
+                                                    <td style="width:14% ; text-align: center;">{{ elt.last_name}}</td>
+                                            
+                                                    <td style="width:14% ; text-align: center;">{{ elt.NumLicenceMedecin}}</td>
+                                                    <td style="width:14% ; text-align: center; padding-right: 5px;">{{elt.Email}}</td>
+                                                    <td style="width:16% ; padding-left: 5px;">
+                                                    <center>
+                                                        <table>
+                                                            
+                                                            <td style="padding: 5px;">  <a href=" {% url  'identifiant:DeleteMedecin'  elt.id %} ">  <input value="Delete" class="" style=" background-color:#A01E19; height:30px; border-color: #A01E19; width: 100px; color: #fff; font-size: 17px; font-weight: 100; text-align: center; letter-spacing: 1px;" ></a></td>
+                                                            
+                                                            
+                                                            
+                                                            <td style="padding: 5px;">  <a href=" {% url  'identifiant:DetailMedecin'  elt.id %} "><input value="Details" class="" style=" background-color:#3A3F3E; height:30px; border-color: #3A3F3E; width: 100px; color: #fff; font-size: 17px; font-weight: 100; text-align: center; letter-spacing: 1px;" > </a> </td> 
+                                                        
+                                                            
+                                                        </tr>
+                                                        </table>
+                                                    </center>
+                                                    </td>
+                                                </tr>
+                                        {% endif %}              
+                                        
+                                    {% endif %}         
+								
+                                {% endfor %}     
+												
+
+                            </table>
+                                                    
+                            
+                              
+                                    
+                                    
+						
+						</div>
+				</div>
+			</div>
+			<div class="blankdivider30"></div>
+
+			<div class="aligncenter">
+
+				<!--<a    href=" {% url 'formulaire' %}" class="btn btn-large btn-theme">Add patient</a>-->
+			</div>
+		</div>
+		
+	</section>
+
+	<footer>
+		<div class="container">
+			<div class="row">
+				<div class="span6 offset3">
+					<ul class="social-networks">
+						<li><a href="#"><i class="icon-circled icon-bgdark icon-instagram icon-2x"></i></a></li>
+						<li><a href="#"><i class="icon-circled icon-bgdark icon-twitter icon-2x"></i></a></li>
+						<li><a href="#"><i class="icon-circled icon-bgdark icon-dribbble icon-2x"></i></a></li>
+						<li><a href="#"><i class="icon-circled icon-bgdark icon-pinterest icon-2x"></i></a></li>
+					</ul>
+					<p class="copyright">
+						&copy; Maxim Theme. All rights reserved.
+						<div class="credits">
+							<!--
+                All the links in the footer should remain intact.
+                You can delete the links only if you purchased the pro version.
+                Licensing information: https://bootstrapmade.com/license/
+                Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/buy/?theme=Maxim
+              -->
+							Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
+						</div>
+					</p>
+				</div>
+			</div>
+		</div>
+		<!-- ./container -->
+	</footer>
+	<a href="#" class="scrollup"><i class="icon-angle-up icon-square icon-bgdark icon-2x"></i></a>
+	<script src="js/jquery.js"></script>
+	<script src="js/jquery.scrollTo.js"></script>
+	<script src="js/jquery.nav.js"></script>
+	<script src="js/jquery.localScroll.js"></script>
+	<script src="js/bootstrap.js"></script>
+	<script src="js/jquery.prettyPhoto.js"></script>
+	<script src="js/isotope.js"></script>
+	<script src="js/jquery.flexslider.js"></script>
+	<script src="js/inview.js"></script>
+	<script src="js/animate.js"></script>
+	<script src="js/custom.js"></script>
+	<script src="contactform/contactform.js"></script>
+
+</body>
+
+</html>

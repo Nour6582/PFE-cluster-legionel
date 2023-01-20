@@ -1,0 +1,233 @@
+{% load static %}
+{% load widget_tweaks %} 
+
+<html lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="description" content="">
+	<meta name="author" content="">
+	<link href="{% static 'css/style2.css' %}" rel="stylesheet">
+	<link rel="stylesheet" type="text/css" href="{% static 'css/opensans-font.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'fonts/material-design-iconic-font/css/material-design-iconic-font.min.css' %}">
+	<!-- datepicker -->
+	<link rel="stylesheet" type="text/css" href="{% static 'css/jquery-ui.min.css' %}">
+	<!-- Main Style Css -->
+    <title>Inscription</title>
+</head>
+<body>
+    <div class="page-content">
+		<div class="wizard-heading">Registration Form</div>
+		<div class="wizard-v6-content">
+			<div class="wizard-form">
+		        <form class="form-register" id="form-register" method="POST" >
+		        	{% csrf_token %}
+					<div id="form-total">
+		        		<!-- SECTION 1 -->
+			            <h2>
+			            	<p class="step-icon"><span>1</span></p>
+			            	<span class="step-text">Personal Info</span>
+			            </h2>
+			            <section>
+			                <div class="inner">
+			                	<div class="form-heading">
+			                		<h3>Personal Info</h3>
+			                		<span>1/3</span>
+			                	</div>
+								<fieldset>
+								<legend class="titl">Name</legend>
+		
+								<div class="form-row">
+							
+									<div class="form-holder">
+										<label class="form-row-inner">
+											<input type="text" name="first_name" maxlength="150"  class="form-control" id="id_first_name" required>
+											<span class="label">First Name</span>
+										</label>
+									</div>
+									<div class="form-holder">
+										<label class="form-row-inner">
+											<input type="text" name="last_name" maxlength="150" class="form-control" id="id_last_name" required>
+ 										    <span class="label">Last Name</span>
+										</label>
+									</div>
+								</div>
+								</fieldset>
+								<fieldset>
+								<legend class="titl">Contacts</legend>
+								
+								<div class="form-row">
+									<div class="form-holder">
+										<label class="form-row-inner">
+											<input type="number" name="telPortable" class="form-control" id="id_telPortable" required>
+											<span class="label">Phone Number</span>
+										</label>
+									</div>
+									<div class="form-holder">
+										<label class="form-row-inner">
+											<input type="text" name="email" maxlength="254" class="form-control" id="id_email" required>			
+											<span class="label">E-Mail</span>
+										</label>
+									</div>
+
+									<div class="form-holder">
+										<label class="form-row-inner">
+											<input type="number" name="fax" class="form-control" id="id_fax" required>
+											<span class="label">Fax</span>
+										</label>
+									</div>
+									
+									
+								</div>
+								</fieldset>
+								<fieldset>
+								<legend class="titl">Address Location</legend>
+								
+								<div class="form-row">
+									<div class="form-holder">
+										<label class="form-row-inner">
+                                            <input type="text" name="Commune" maxlength="100" class="form-control" required="" id="id_Commune">
+											<span class="label">Commune</span>
+										</label>
+									</div>
+									<div class="form-holder">
+										<label class="form-row-inner">
+                                            <input type="text" name="Wilaya" maxlength="100" class="form-control" required="" id="id_Wilaya">
+											<span class="label">Wilaya</span>
+										</label>
+									</div>
+
+									<div class="form-holder">
+										<label class="form-row-inner">
+                                        <input type="text" name="Daira" maxlength="100" class="form-control" required="" id="id_Daira">
+											<span class="label">Daira</span>
+										</label>
+									</div>
+								</div>
+</fieldset>
+						
+				
+							</div>
+			            </section>
+						<!-- SECTION 2 -->
+			            <h2>
+			            	<p class="step-icon"><span>2</span></p>
+			            	<span class="step-text">Professional Info</span>
+			            </h2>
+			            <section>
+			                <div class="inner">
+			                	<div class="form-heading">
+			                		<h3>Professional Info</h3>
+			                		<span>2/3</span>
+			                	</div>
+								<div class="form-row">
+							
+									<div class="form-holder">
+										<label class="form-row-inner">
+											<input type="text" name="spécialité" maxlength="100"  class="form-control" id="id_spécialité" >
+											<span class="label">Spécialité</span>
+										</label>
+									</div>
+								
+									<div class="form-holder" style="margin-top: -20px;">
+										<label class="special-label-1" for="id_typeIntroducteur">Type de Compte</label>
+											<select name="typeIntroducteur" class="form-control" id="id_typeIntroducteur" >
+												<option value="Médecin" selected>Médecin</option>
+											  
+												<option value="laboratoire biologique">Laboratoire Biologique</option>
+											  
+												<option value="centre radiologique">Centre Radiologique</option>
+											  
+											  </select>
+											  <span class="select-btn">
+												<i class="zmdi zmdi-chevron-down"></i>
+											</span>
+
+									</div>
+								</div>
+								<div class="form-row">
+							
+									<div class="form-holder">
+										<label class="form-row-inner">
+                                            <input type="text" name="NumLicenceMedecin" maxlength="30" class="form-control" id="id_NumLicenceMedecin" required>
+											<span class="label">Numero de licence du médecin si médecin</span>
+										</label>
+									</div>
+								
+									<div class="form-holder">
+										<label class="form-row-inner">
+                                        <input type="text" name="NumLicenceResponsable" maxlength="30"  class="form-control" id="id_NumLicenceResponsable" >	
+										<span class="label" style="margin-top: -20px;">Numero de licence du responsable du laboratoire biologique ou du centre de radiologie</span>
+										</label>
+									</div>
+								</div>
+							    <div class="form-row">
+							
+									<div class="form-holder">
+										<label class="form-row-inner">
+                                            <input type="text" name="Num_Autorisation" maxlength="100" class="form-control" id="id_Num_Autorisation" >
+											<span class="label">Numero dautorisation dexploitation</span>
+										</label>
+									</div>
+								
+									<div class="form-holder">
+										<label class="form-row-inner">
+                                        <input type="text" name="Nom_laboHopital" maxlength="100" class="form-control" id="id_Nom_laboHopital">
+										<span class="label" style="margin-top: -20px;">Le nom de lhopital ou du laboratoire biologique ou du centre radiologique</span>
+										</label>
+									</div>
+								</div>
+					
+							</div>
+			            </section>
+			            <!-- SECTION 3 -->
+			            <h2>
+			            	<p class="step-icon"><span>3</span></p>
+			            	<span class="step-text">Identifiers</span>
+			            </h2>
+			            <section>
+			                <div class="inner">
+			                	<div class="form-heading">
+			                		<h3>Etape finale</h3>
+			                		<span>3/3</span>
+			                	</div>
+								<div class="form-row">
+									<div class="form-holder form-holder-2">
+										<label class="form-row-inner">
+											<input type="text" name="username" maxlength="150" autocapitalize="none" autofocus="" class="form-control" required="" id="id_username">		
+											<span class="label">Username</span>
+										</label>
+									</div>
+								</div>
+
+								<div class="form-row">
+									<div class="form-holder form-holder-2">
+										<label class="form-row-inner">
+											<input type="password" name="password1" autocomplete="new-password" class="form-control" required="" id="id_password1" aria-autocomplete="list">
+											<span class="label">Mot de passe</span>
+										</label>
+									</div>
+								</div>
+
+								<div class="form-row">
+									<div class="form-holder form-holder-2">
+										<label class="form-row-inner">
+											<input type="password" name="password2" autocomplete="new-password"  class="form-control" required="" id="id_password2">
+											<span class="label">Confirmation de mot de passe</span>
+										</label>
+									</div>
+								</div>
+			            </section>
+		        	</div>
+					<button type="submit" style="color: azure;" >submit</button>
+		        </form>
+			</div>
+		</div>
+	</div>
+
+	<script src="{% static 'js/jquery-3.3.1.min.js' %}"></script>
+	<script src="{% static 'js/jquery.steps.js' %}"></script>
+	<script src="{% static 'js/jquery-ui.min.js' %}"></script>
+	<script src="{% static 'js/main.js' %}"></script>
+</body>
+</html>
+ 

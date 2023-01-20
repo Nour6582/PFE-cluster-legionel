@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>PFE</title>
+    <style>
+        .lead
+        {
+            padding-top: 10px;
+            padding-bottom: 10px;
+            padding-left:6px;
+            padding-right:6px;
+            margin-top:10px;
+            background-color:#f6f6f6
+            width:100%;
+        }
+    </style>
+</head>
+<body>
+
+       
+ {% if request.user.is_authenticated %}
+
+ <p>your are login in  as : <a href=" {% url  'identifiant:DetailMedecin'  request.user.id %} "> {{ request.user.username }}</a></p>
+<p>	<a href={% url 'identifiant:logout' %}> logout </a></p>
+
+{% else %}
+<p><a href={% url 'identifiant:signup' %}> sign up </a></P>
+
+<p><a href={% url 'identifiant:login' %}> login </a></p>
+{% endif %}
+{% if request.user.is_superuser  %}
+       <p><a href={% url 'identifiant:ListMedecin' %}> listes des Medecin </a></P> 
+       
+{% endif %}   
+ 
+ <p><a href={% url 'identifiant:homepage' %}> Homepage</a></P> 
+    
+        <hr>
+
+    {%  block content%}
+    {% endblock content %}
+</body>
+</html>

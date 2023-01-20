@@ -1,0 +1,200 @@
+{% load static %}
+{% load widget_tweaks %} 
+
+<html lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="description" content="">
+	<meta name="author" content="">
+	<link href="{% static 'css/style4.css' %}" rel="stylesheet">
+	<link rel="stylesheet" type="text/css" href="{% static 'css/opensans-font.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'fonts/material-design-iconic-font/css/material-design-iconic-font.min.css' %}">
+	<!-- datepicker -->
+	<link rel="stylesheet" type="text/css" href="{% static 'css/jquery-ui.min.css' %}">
+	<!-- Main Style Css -->
+    <title>Details d'un patient</title>
+</head>
+<body>
+    <div class="page-content">
+		<div class="wizard-v6-content">
+			<div class="wizard-form">
+		        <form class="form-register" id="form-register" action="#" method="post">
+		        	<div id="form-total">
+			            <section>
+			                <div class="inner" style="mmargin-left: 50px; margin-right: 50px;">
+								<div class="form-row">
+									<div class="form-holder d2 d3">
+                                        <center>
+                                            <div style="margin-top: 200px;"> 
+                                                <img src="{% static 'img/team/img-2.jpg' %}" alt="" style="border-radius: 50%;"/>
+                                            </div>
+                                            <div>
+                                                <p>Medecin</p>
+                                                <p style="font-size: 12px; font-weight:100;letter-spacing:1px; color:#43ccba">{{med.username}}</p>
+                                            </div>
+    
+                                        </center>
+                           
+									</div>
+									<div class="form-holder d2 d">
+                                            <center>
+                                                <p class="wizard-heading">Medecin Information</p>
+                                            </center>
+                                            <div class="elmnt">
+                                                <label>Prenom</label>
+                                                <input type="text" class="form-control" readonly value="{{med.first_name}}">
+                                            </div> 
+                                            <div class="elmnt">
+                                                <label>Nom</label>
+                                            <input type="text" class="form-control" readonly value="{{med.last_name}}">
+                                            </div>
+                                            <div class="elmnt">
+                                                <label>Numero Telephone</label>
+                                            <input type="text" class="form-control" readonly value="{{med.telPortable}}">
+                                            </div>
+                                            <div class="elmnt">
+                                                <label>Fax</label>
+                                            <input type="text" class="form-control" readonly value="{{med.fax}}">
+                                            </div>
+                                            <div class="elmnt">
+                                                <label>spécialité</label>
+                                            <input type="text" class="form-control" readonly value="{{med.spécialité}}">
+                                            </div>
+                                            
+                                        
+                                        
+                                        <div class="elmnt">
+                                            <label>Numero Licence du Medecin</label>
+                                        <input type="text" class="form-control" readonly value="{{med.NumLicenceMedecin}}">
+                                        </div>
+                                        <div class="elmnt">
+                                            <label>Daira</label>
+                                        <input type="text" class="form-control" readonly value=" {{med.Daira}} ">
+                                        </div>
+                                        <div class="elmnt">
+                                            <label>Commune</label>
+                                        <input type="text" class="form-control" readonly value=" {{med.Commune}} ">
+                                        </div>
+                                        <div class="elmnt">
+                                            <label>Wilaya</label>
+                                        <input type="text" class="form-control" readonly value="{{med.Wilaya}}">
+                                        </div>
+                                        
+                                        
+                                        <div class="elmnt">
+                                            <label>Information sur le centre radiologique ou laboratoire biologique</label>
+                                       <div>
+                                        <table class="table1">
+                                            <tr>
+                                                <td>Commune:</td>
+                                                <td>{{med.Commune}}</td>
+                                            </tr>
+                                            <tr><td>
+                                                Wilaya:
+
+                                            </td>
+                                        <td>
+                                            {{med.Wilaya}}
+                                        </td></tr>
+                                        <tr>
+                                            <td>
+                                                Daira: 
+   
+                                            </td>
+                                            <td>
+                                                {{med.Daira}}
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                Numero Licence du Responsable du centre radiologique ou laboratoire biologique
+                                            </td>
+                                            <td>
+                                                {{med.NumLicenceResponsable}}
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                Numero de l'autorisation  
+                                            </td>
+                                            <td>
+                                                {{ med.Num_Autorisation}}
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                             <td>
+                                                Nom du laboratoire/hopital/centre radiologique
+                                             </td>
+                                             <td>
+                                                {{med.Nom_laboHopital}}
+                                             </td>
+                                        </tr>
+                                        
+                                        
+                                        
+                                        </table>
+                                       </div>
+                                        </div>
+                                        <div class="elmnt">
+                                            
+                                        </div>
+									</div>
+                                    <div class="form-holder d3">
+                                        <!---
+                                        <center>
+                                            <p class="wizard-heading2">Radiological Information</p>
+                                            <p class="p1">None</p>
+                                            <table>
+                                                <tr><td style="padding: 5px; margin-left: 10px;">    <input value="Edit Info" class="" style=" background-color:transparent; height:30px; border-color: #55e8d5; color: #fff; font-size: 17px; font-weight: 100; text-align: center; letter-spacing: 1px; color: #55e8d5;"  readonly>
+                                                </td>
+                                                <td style="padding: 5px;">    <input value="Add Info" class="" style=" background-color:#55e8d5; height:30px; border-color:#55e8d5 ; color: #fff; font-size: 17px; font-weight: 100; text-align: center; letter-spacing: 1px;" readonly >
+                                                </td>
+                                            
+                                            </tr>
+                                            </table>
+                                        </center>
+                                          --->   
+                                        <center>
+                                            <p class="wizard-heading2">Actions</p>
+                    
+                                            <table>
+                                                <tr><td style="padding: 5px; margin-left: 10px;">  <a href=" {% url  'identifiant:DeleteMedecin'  med.id %} ">   <input value="supprimer" class="" style=" background-color:transparent; height:30px; border-color: #55e8d5; color: #fff; font-size: 17px; font-weight: 100; text-align: center; letter-spacing: 1px; color: #55e8d5;" readonly ></a>
+                                                </td></tr>
+
+                                                {% if request.user.is_superuser  %}</tr> <td style="padding: 5px;"> <a href=" {% url  'identifiant:ValiderMedecin'  med.id %} ">   <input value="valider" class="" style=" background-color:#55e8d5; height:30px; border-color:#55e8d5 ; color: #fff; font-size: 17px; font-weight: 100; text-align: center; letter-spacing: 1px;" readonly ></a>{% endif %}
+                                                </td></tr>
+                                                
+                                                <tr><td style="padding: 5px;"> <a href=" {% url  'identifiant:updateUser'  med.id %} ">     <input value="Editer" class="" style=" background-color:#55e8d5; height:30px; border-color:#55e8d5 ; color: #fff; font-size: 17px; font-weight: 100; text-align: center; letter-spacing: 1px;" readonly ></a>
+
+                                                </td>
+                                            </tr>
+                                            </table>
+                                        </center>
+
+                                                       
+                            
+
+                            
+                      
+
+                                       
+                              
+									</div>
+								</div>
+			            </section>
+		        	</div>
+		        </form>
+			</div>
+		</div>
+	</div>
+
+	<script src="{% static 'js/jquery-3.3.1.min.js' %}"></script>
+	<script src="{% static 'js/jquery.steps.js' %}"></script>
+	<script src="{% static 'js/jquery-ui.min.js' %}"></script>
+	<script src="{% static 'js/main.js' %}"></script>
+</body>
+</html>
+ 
+
+
+

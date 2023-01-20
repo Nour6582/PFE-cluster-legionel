@@ -1,0 +1,245 @@
+{% load static %}
+{% load widget_tweaks %} 
+
+<html lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="description" content="">
+	<meta name="author" content="">
+	<link href="{% static 'css/style4.css' %}" rel="stylesheet">
+	<link rel="stylesheet" type="text/css" href="{% static 'css/opensans-font.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'fonts/material-design-iconic-font/css/material-design-iconic-font.min.css' %}">
+	<!-- datepicker -->
+	<link rel="stylesheet" type="text/css" href="{% static 'css/jquery-ui.min.css' %}">
+	<!-- Main Style Css -->
+    <title>Details d'un patient</title>
+</head>
+<body>
+    <div class="page-content">
+		<div class="wizard-v6-content">
+			<div class="wizard-form">
+		        <form class="form-register" id="form-register" action="#" method="post">
+		        	<div id="form-total">
+			            <section>
+			                <div class="inner" style="mmargin-left: 50px; margin-right: 50px;">
+								<div class="form-row">
+									<div class="form-holder d2 d3">
+                                        <center>
+                                            <div style="margin-top: 200px;"> 
+                                                <img src="{% static 'img/team/img-2.jpg' %}" alt="" style="border-radius: 50%;"/>
+                                            </div>
+                                            <div>
+                                                <p>Patient n°: {{Patient.id}}</p>
+                                                <p style="font-size: 12px; font-weight:100;letter-spacing:1px; color:#43ccba">{{Patient.Email}}</p>
+                                            </div>
+    
+                                        </center>
+                           
+									</div>
+									<div class="form-holder d2 d">
+                                            <center>
+                                                <p class="wizard-heading">Patient Information</p>
+                                            </center>
+                                            <div class="elmnt">
+                                                <label>First Name</label>
+                                            <input type="text" class="form-control" readonly value="{{Patient.Prenom}}">
+                                            </div> 
+                                            <div class="elmnt">
+                                                <label>Married Name</label>
+                                            <input type="text" class="form-control" readonly value="{{Patient.nomMarital}}">
+                                            </div>
+                                            <div class="elmnt">
+                                                <label>Last Name</label>
+                                            <input type="text" class="form-control" readonly value="{{Patient.Nom}}">
+                                            </div>
+                                            <div class="elmnt">
+                                                <label>Date of Birth</label>
+                                            <input type="text" class="form-control" readonly value="{{Patient.Date_naissance}}">
+                                            </div>
+                                            <div class="elmnt">
+                                                <label>Place of Birth</label>
+                                            <input type="text" class="form-control" readonly value="{{Patient.lieu_naissance.Daira}}, {{Patient.lieu_naissance.wilaya}}, {{Patient.lieu_naissance.Commune}}">
+                                        
+                                        </div>
+                                        <div class="elmnt">
+                                            <label>Sexe</label>
+                                        <input type="text" class="form-control" readonly value="{{Patient.sexe}}">
+                                        </div>
+                                        <div class="elmnt">
+                                            <label>Telephone Number</label>
+                                        <input type="text" class="form-control" readonly value="{{Patient.Tel}}">
+                                        </div>
+                                        <div class="elmnt">
+                                            <label>E-mail</label>
+                                        <input type="text" class="form-control" readonly value="{{Patient.Email}}">
+                                        </div>
+                                        <div class="elmnt">
+                                            <label>Fax</label>
+                                        <input type="text" class="form-control" readonly value="{{Patient.fax}}">
+                                        </div>
+                                        <div class="elmnt">
+                                            <label>Adress</label>
+                                       <div>
+                                        <table class="table1">
+                                            <tr>
+                                                <td>Commune:</td>
+                                                <td>{{Patient.ResidencePermanent.adresse.Commune}}</td>
+                                            </tr>
+                                            <tr><td>
+                                                Wilaya:
+
+                                            </td>
+                                        <td>
+                                          {{Patient.ResidencePermanent.adresse.wilaya}}
+                                        </td></tr>
+                                        <tr>
+                                            <td>
+                                                Daira: 
+   
+                                            </td>
+                                            <td>
+                                                {{Patient.ResidencePermanent.adresse.Daira}}
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                Street Number:
+                                            </td>
+                                            <td>
+                                                {{Patient.ResidencePermanent.NumRue}}
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                Name of the Street:  
+                                            </td>
+                                            <td>
+                                                {{Patient.ResidencePermanent.NomRue}}
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                             <td>
+                                                Building Number:
+                                             </td>
+                                             <td>
+                                                {{Patient.ResidencePermanent.NumBattiment}}
+                                             </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Apartment Number</td>
+                                            <td>{{Patient.ResidencePermanent.NumAppartement}}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Post Office Box Number</td>
+                                            <td>{{Patient.ResidencePermanent.NumBoitePostal}}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Postal Code</td>
+                                            <td>{{Patient.ResidencePermanent.CodePostal}}</td>
+                                        </tr>
+                                        </table>
+                                       </div>
+                                        </div>
+                                        <div class="elmnt">
+                                            <table>
+                                                <tr><td style="padding: 5px; margin-left: 10px;">   <a href=" {% url  'patient:UpdatePatient'  Patient.pk %} "><input value="Edit" class="" style=" background-color:transparent; height:30px; border-color: #55e8d5; color: #fff; font-size: 17px; font-weight: 100; text-align: center; letter-spacing: 1px; color: #55e8d5;" readonly ></a>
+
+                                                </td>
+                                                <td style="padding: 5px;">   <a href=" {% url  'patient:DeletePatient'  Patient.pk %} "> <input value="Delete" class="" style=" background-color:#A01E19; height:30px; border-color:#A01E19 ; color: #fff; font-size: 17px; font-weight: 100; text-align: center; letter-spacing: 1px;" readonly ></a>
+                                                </td>
+                                            
+                                            </tr>
+                                            </table>
+                                        </div>
+									</div>
+                                    <div class="form-holder d3">
+                                        <!---
+                                        <center>
+                                            <p class="wizard-heading2">Radiological Information</p>
+                                            <p class="p1">None</p>
+                                            <table>
+                                                <tr><td style="padding: 5px; margin-left: 10px;">    <input value="Edit Info" class="" style=" background-color:transparent; height:30px; border-color: #55e8d5; color: #fff; font-size: 17px; font-weight: 100; text-align: center; letter-spacing: 1px; color: #55e8d5;"  readonly>
+                                                </td>
+                                                <td style="padding: 5px;">    <input value="Add Info" class="" style=" background-color:#55e8d5; height:30px; border-color:#55e8d5 ; color: #fff; font-size: 17px; font-weight: 100; text-align: center; letter-spacing: 1px;" readonly >
+                                                </td>
+                                            
+                                            </tr>
+                                            </table>
+                                        </center>
+                                        <center>
+                                            <p class="wizard-heading2">Biological Information</p>
+                                            <p class="p1">None</p>
+                                            <table>
+                                                <tr><td style="padding: 5px; margin-left: 10px;">    <input value="Edit Info" class="" style=" background-color:transparent; height:30px; border-color: #55e8d5; color: #fff; font-size: 17px; font-weight: 100; text-align: center; letter-spacing: 1px; color: #55e8d5;" readonly >
+                                                </td>
+                                                <td style="padding: 5px;">    <input value="Add Info" class="" style=" background-color:#55e8d5; height:30px; border-color:#55e8d5 ; color: #fff; font-size: 17px; font-weight: 100; text-align: center; letter-spacing: 1px;" readonly >
+                                                </td>
+                                            
+                                            </tr>
+                                            </table>
+                                        </center>
+
+                                           --->                 
+                            
+
+                            
+                      
+
+                                        <center>                                        
+                                            {% if Patient.InfoClinique %}
+                                                <p class="wizard-heading2"><a href=" {% url  'patient:UpdateInfoClinique'  Patient.InfoClinique.id %} " class="" style=" background-color:transparent; height:30px; border-color: #55e8d5; color: #fff; font-size: 17px; font-weight: 100; text-align: center; letter-spacing: 1px; color: #55e8d5;" readonly>Update Des Informations Clinique</a></P>
+                                            {% else%}
+                                                <p class="wizard-heading2"><a href=" {% url  'patient:InfoClinique'  Patient.pk %} " class="" style=" background-color:transparent; height:30px; border-color: #55e8d5; color: #fff; font-size: 17px; font-weight: 100; text-align: center; letter-spacing: 1px; color: #55e8d5;" readonly>Ajout Des Informations Clinique</a></P>
+                                            {% endif %}
+                                        </center>
+
+                                        <center>   
+                                            {% if Patient.QuestionAvecPrelevement %}
+                                                <p class="wizard-heading2"><a  href=" {% url  'patient:UpdateQuestionAvecPrelevement'  Patient.QuestionAvecPrelevement.id %} " class="" style=" background-color:transparent; height:30px; border-color: #55e8d5; color: #fff; font-size: 17px; font-weight: 100; text-align: center; letter-spacing: 1px; color: #55e8d5;" readonly>update des Question Avec Prelevement</a></P>
+                                                <P><a"></a></P>
+                                            {% else%}
+                                                <p class="wizard-heading2"><a href=" {% url  'patient:QuestionAvecPrelevement'  Patient.pk %} " class="" style=" background-color:transparent; height:30px; border-color: #55e8d5; color: #fff; font-size: 17px; font-weight: 100; text-align: center; letter-spacing: 1px; color: #55e8d5;" readonly>Question Avec Prelevement</a></P>
+                                                <P><a ></a></P>
+                                            {% endif %}
+                                        </center> 
+
+                                              <center>
+
+                                          
+                                             {% if not Patient.casmalade %} <P><a href=" {% url  'patient:casMalade'  Patient.pk %} " class="" style=" background-color:transparent; height:30px; border-color: #55e8d5; color: #fff; font-size: 17px; font-weight: 100; text-align: center; letter-spacing: 1px; color: #55e8d5;" readonly >Definir si c'est un cas positif ou negatif</a></P>  {% endif %}
+                    
+                                                </center>
+                     <center>
+                            {% if Patient.InfoRadiologique %}
+                            <P><a href=" {% url  'patient:UpdateInfoRadiologique'  Patient.InfoRadiologique.id %} " class="" style=" background-color:transparent; height:30px; border-color: #55e8d5; color: #fff; font-size: 17px; font-weight: 100; text-align: center; letter-spacing: 1px; color: #55e8d5;" readonly >Updates Des InfoRadiologique</a></P>
+                            {% else%}
+                            <P><a href=" {% url  'patient:InfoRadiologique'  Patient.pk %} " class="" style=" background-color:transparent; height:30px; border-color: #55e8d5; color: #fff; font-size: 17px; font-weight: 100; text-align: center; letter-spacing: 1px; color: #55e8d5;" readonly >Ajout Des InfoRadiologique</a></P>
+                            {% endif %}
+                     </center>
+                        
+                         <center>
+                            {% if Patient.InfoBiologique %}
+                            <P><a href=" {% url  'patient:UpdateInfoBiologique'  Patient.InfoBiologique.id %} " class="" style=" background-color:transparent; height:30px; border-color: #55e8d5; color: #fff; font-size: 17px; font-weight: 100; text-align: center; letter-spacing: 1px; color: #55e8d5;" readonly >Update Des InfoBiologique</a></P>
+                            {% else%}
+                            <P><a href=" {% url  'patient:InfoBiologique'  Patient.pk %} " class="" style=" background-color:transparent; height:30px; border-color: #55e8d5; color: #fff; font-size: 17px; font-weight: 100; text-align: center; letter-spacing: 1px; color: #55e8d5;" readonly >Ajout Des InfoBiologique</a></P>
+                            {% endif %}
+                         </center>
+									</div>
+								</div>
+			            </section>
+		        	</div>
+		        </form>
+			</div>
+		</div>
+	</div>
+
+	<script src="{% static 'js/jquery-3.3.1.min.js' %}"></script>
+	<script src="{% static 'js/jquery.steps.js' %}"></script>
+	<script src="{% static 'js/jquery-ui.min.js' %}"></script>
+	<script src="{% static 'js/main.js' %}"></script>
+</body>
+</html>
+ 
+
+
+

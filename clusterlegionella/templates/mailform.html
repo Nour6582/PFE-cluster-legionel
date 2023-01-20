@@ -1,0 +1,231 @@
+{% load static %}
+{% load widget_tweaks %} 
+
+<html lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="description" content="">
+	<meta name="author" content="">
+	<link href="{% static 'css/style3.css' %}" rel="stylesheet">
+	<link rel="stylesheet" type="text/css" href="{% static 'css/opensans-font.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'fonts/material-design-iconic-font/css/material-design-iconic-font.min.css' %}">
+	<!-- datepicker -->
+	<link rel="stylesheet" type="text/css" href="{% static 'css/jquery-ui.min.css' %}">
+	<!-- Main Style Css -->
+    <title>{{title}}</title>
+</head>
+<body>
+    <div class="page-content">
+		<div class="wizard-heading">{{title}}</div>
+		<div class="wizard-v6-content">
+			<div class="wizard-form">
+		        <form class="form-register" id="form-register" action="#" method="post">
+
+					{%  csrf_token  %}
+
+                  
+
+					<div class="form-holder">
+						<label class="form-row-inner">
+							<span class="label">{{ form.as_p }}</span>
+						</label>
+					</div>
+										
+				  
+					
+					
+
+					
+					
+					
+			        
+			        
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+                    
+					
+					
+					
+					
+					
+					
+					
+				
+				
+				
+				
+                
+				
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+                    
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+                    
+                    
+                    
+                    
+                
+                
+               
+                
+                
+                
+                
+                
+                
+                    
+                    
+                    
+    
+                    
+    
+    
+    
+    
+    
+    
+    
+
+
+
+    
+    
+    
+   
+    
+    
+    
+    
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+
+
+
+
+
+    
+
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+	
+    
+    
+    
+
+
+
+
+
+    
+
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+					
+<center>
+	<table>
+	<tr><td style="padding: 5px;">    <button type="submit"  class="" style=" background-color:transparent; height:30px; border-color: #55e8d5; width: 100px; color: #fff; font-size: 17px; font-weight: 100; text-align: center; letter-spacing: 1px; color: #55e8d5;" >Valider</button>
+	</td>
+	
+	
+	
+	
+
+	
+</tr>
+</table>
+</center>
+			            </section>
+		        	</div>
+		        </form>
+			</div>
+		</div>
+	</div>
+{% if errors %}
+<div>
+  {% for key, error in errors %}
+  {% autoescape off %}
+    {{ error }}
+  {% endautoescape %}
+  {% endfor %}
+</div>
+{% endif %}
+	<script src="{% static 'js/jquery-3.3.1.min.js' %}"></script>
+	<script src="{% static 'js/jquery.steps.js' %}"></script>
+	<script src="{% static 'js/jquery-ui.min.js' %}"></script>
+	<script src="{% static 'js/main.js' %}"></script>
+</body>
+</html>
+ 
+
+
+

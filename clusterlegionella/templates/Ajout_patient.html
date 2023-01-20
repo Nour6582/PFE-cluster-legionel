@@ -1,0 +1,694 @@
+{% load static %}
+
+{% load widget_tweaks %} 
+
+{%  block content%}
+
+<html lang="en">
+
+<head>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+	<meta name="description" content="">
+
+	<meta name="author" content="">
+
+	<link href="{% static 'css/style3.css' %}" rel="stylesheet">
+
+	<link rel="stylesheet" type="text/css" href="{% static 'css/opensans-font.css' %}">
+
+	<link rel="stylesheet" type="text/css" href="{% static 'fonts/material-design-iconic-font/css/material-design-iconic-font.min.css' %}">
+
+	<!-- datepicker -->
+
+	<link rel="stylesheet" type="text/css" href="{% static 'css/jquery-ui.min.css' %}">
+
+	<!-- Main Style Css -->
+
+    <title>Ajout d'un patient</title>
+
+</head>
+
+<body>
+
+    <div class="page-content">
+
+		<div class="wizard-heading">Add Patient Form</div>
+
+		<div class="wizard-v6-content">
+
+			<div class="wizard-form">
+
+		        <form class="form-register" id="form-register" action="#" method="post">
+					{% csrf_token %}
+
+		        	<div id="form-total">
+
+			            <section>
+
+			                <div class="inner" style="margin-top: 50px; margin-left: 50px; margin-right: 50px; margin-bottom: 50px;">
+
+								<div class="form-row">
+
+									<div class="form-holder">
+
+										<label class="form-row-inner">
+
+											<input type="text" class="form-control" id="id_Nomp" name="Nomp" required>
+
+											<span class="label">Nom de jeune fille ( si femme )</span>
+
+										</label>
+
+									</div>
+
+									<div class="form-holder">
+
+										<label class="form-row-inner">
+
+											<input type="text" class="form-control" id="id_Nommaritalp" name="Nommaritalp" >
+
+											<span class="label">Nom marital</span>
+
+										</label>
+
+									</div>  
+
+								</div>
+
+                                <div class="form-row">
+
+									<div class="form-holder">
+
+										<label class="form-row-inner">
+
+											<input type="text" class="form-control" id="id_Prenomp" name="Prenom_p" required>
+
+											<span class="label">Prenom</span>
+
+										</label>
+
+									</div>
+
+									<div class="form-holder">
+
+										<label for="day" class="special-label-1">Date of Birth</label>
+
+										<input type="text" name="datenaissance_day" class="day" id="id_datenaissance_day" placeholder="15 / 08 / 2018" style=" border-bottom-color: rgba(0, 0, 0, 0.3);">
+
+									</div>
+
+								</div>
+
+                                <div class="form-row">
+
+									<div class="form-row-inner" style="margin-left:20px; margin-right:50px"><span class="label" style="color: #000;"></span></div>
+
+									<div style="width: 50%;">
+
+										<label class="form-row-inner" for="id_sexe">Sexe&nbsp;:</label>
+
+										<select name="sexe" id="id_sexe">
+
+											<option value="M">M</Main></option>
+
+											<option value="F">F</Main></option>
+
+										</select>
+
+											
+
+									</div>
+
+									<div class="form-holder">
+
+										<label class="form-row-inner">
+
+											<input type="number" class="form-control" id="id_Tel" name="Tel" required>
+
+											<span class="label">Tel</span>
+
+										</label>
+
+									</div>
+
+								</div>
+
+                                <div class="form-row">
+
+									<div class="form-holder">
+
+										<label class="form-row-inner">
+
+											<input type="number" class="form-control" id="id_fax" name="fax" >
+
+											<span class="label">Fax</span>
+
+										</label>
+
+									</div>
+
+									<div class="form-holder">
+
+										<label class="form-row-inner">
+
+											<input type="text" class="form-control" id="id_Email" name="Email" >
+
+											<span class="label">E-Mail</span>
+
+										</label>
+
+									</div>
+
+								</div>
+
+                                <fieldset>
+
+                                    <legend class="title">Place of Birth</legend>
+
+                                    
+
+                                    <div class="form-row">
+
+                                        <div class="form-holder">
+
+                                            <label class="form-row-inner">
+
+                                                <input type="text" name="Commune" maxlength="100" class="form-control" required="" id="id_Commune">
+
+                                                <span class="label">Commune</span>
+
+                                            </label>
+
+                                        </div>
+
+                                        <div class="form-holder">
+
+                                            <label class="form-row-inner">
+
+                                                <input type="text" name="Wilaya" maxlength="100" class="form-control" required="" id="id_Wilaya">
+
+                                                <span class="label">Wilaya</span>
+
+                                            </label>
+
+                                        </div>
+
+    
+
+                                        <div class="form-holder">
+
+                                            <label class="form-row-inner">
+
+                                            <input type="text" name="Daira" maxlength="100" class="form-control" required="" id="id_Daira">
+
+                                                <span class="label">Daira</span>
+
+                                            </label>
+
+                                        </div>
+
+                                    </div>
+
+    </fieldset>
+
+    <fieldset style="margin-top: 20px; margin-bottom: 20px; ">
+
+        <legend class="titl">Place of residence</legend>
+
+        
+
+        <div class="form-row">
+
+            <div class="form-holder">
+
+                <label class="form-row-inner">
+
+                    <input type="text" name="NumRue" maxlength="100" class="form-control" required="" id="id_NumRue">
+
+                    <span class="label">Numero de la rue</span>
+
+                </label>
+
+            </div>
+
+            <div class="form-holder">
+
+                <label class="form-row-inner">
+
+                    <input type="text" name="NomRue" maxlength="100" class="form-control" required="" id="id_NomRue">
+
+                    <span class="label">Nom de la Rue</span>
+
+                </label>
+
+            </div>
+
+
+
+            <div class="form-holder">
+
+                <label class="form-row-inner">
+
+                <input type="text" name="CodePostal" maxlength="100" class="form-control" required="" id="id_CodePostal">
+
+                    <span class="label">Code Postal</span>
+
+                </label>
+
+            </div>
+
+        </div>
+
+		<div class="form-row">
+
+            <div class="form-holder">
+
+                <label class="form-row-inner">
+
+                    <input type="text" name="NumBoitePostal" maxlength="100" class="form-control" required="" id="id_NumBoitePostal">
+
+                    <span class="label">Numero Boite Postale</span>
+
+                </label>
+
+            </div>
+
+            <div class="form-holder">
+
+                <label class="form-row-inner">
+
+                    <input type="text" name="NumBattiment" maxlength="100" class="form-control" required="" id="id_NumBattiment">
+
+                    <span class="label">Numero Batiment</span>
+
+                </label>
+
+            </div>
+
+
+
+            <div class="form-holder">
+
+                <label class="form-row-inner">
+
+                <input type="text" name="NumAppartement" maxlength="100" class="form-control" required="" id="id_NumAppartement">
+
+                    <span class="label">Num Appartement</span>
+
+                </label>
+
+            </div>
+
+        </div>
+
+		<div class="form-row">
+
+            <div class="form-holder">
+
+                <label class="form-row-inner">
+
+                    <input type="text" name="adressewilaya" maxlength="100" class="form-control" required="" id="id_adressewilaya">
+
+                    <span class="label">Adresse de la Wilaya</span>
+
+                </label>
+
+            </div>
+
+            <div class="form-holder">
+
+                <label class="form-row-inner">
+
+                    <input type="text" name="adresseDaira" maxlength="100" class="form-control" required="" id="id_adresseDaira">
+
+                    <span class="label">Adresse de la Daira</span>
+
+                </label>
+
+            </div>
+
+
+
+            <div class="form-holder">
+
+                <label class="form-row-inner">
+
+                <input type="text" name="adresseCommune" maxlength="100" class="form-control" required="" id="id_adresseCommune">
+
+                    <span class="label">adresse Commune</span>
+
+                </label>
+
+            </div>
+
+        </div>
+
+
+
+</fieldset>
+
+
+
+<fieldset style="margin-top: 20px; margin-bottom: 20px; ">
+
+	<legend class="titl">Etat Global du Patient</legend>
+
+	
+
+	<div class="form-row">
+
+		<div class="form-row-inner" style="margin-left:20px; margin-right:50px"><span class="label" style="color: #000;"></span></div>
+
+									<div style="width: 50%;">
+
+										<label class="form-row-inner" for="id_etatDuPatient">Etat du patient au moment de l'introduction du questionnaire&nbsp;:</label>
+
+										<select name="sexe" id="id_etatDuPatient">
+
+											<option value="Gueri">Gueri</Main></option>
+
+											<option value="Malade">Malade</Main></option>
+
+											<option value="Decede">Decede</Main></option>
+
+										</select>
+
+											
+
+									</div>
+
+		
+
+		<div class="form-holder">
+
+			<label class="form-row-inner">
+
+			<input type="text" name="SipathologieChroniqueAso" maxlength="100" class="form-control" required="" id="id_SipathologieChroniqueAso">
+
+				<span class="label">Pathologie chronique</span>
+
+			</label>
+
+		</div>
+
+					
+
+		<div class="form-holder">
+
+			<label class="form-row-inner">
+
+			<input type="text" name="DiagnosticDepathologiChronique" maxlength="100" class="form-control" required="" id="id_DiagnosticDepathologiChronique">
+
+				<span class="label">Diagnostic De pathologie Chronique</span>
+
+			</label>
+
+		</div>
+
+		
+
+
+
+	</div>
+
+	
+
+</fieldset>
+
+
+
+<fieldset style="margin-top: 20px; margin-bottom: 20px; ">
+
+	<legend class="titl">Precondition</legend>
+
+	
+
+	<div class="form-row">
+
+		<div class="form-row-inner" style="margin-left:20px; margin-right:50px"><span class="label" style="color: #000;"></span></div>
+
+									<div style="width: 50%;">
+
+										<label class="form-row-inner" for="id_facteurrisque">facteur risque&nbsp;:</label>
+
+										<div id="id_facteurrisque">
+
+											<div>
+
+												<label for="id_facteurrisque_0">
+
+													<input type="checkbox" name="facteurrisque" value="Greffe de Moelle Osseuse" id="id_facteurrisque_0">
+
+													"Greffe de Moelle Osseuse"
+
+												</label>
+
+											</div>
+
+											<div>
+
+												<label for="id_facteurrisque_1">
+
+													<input type="checkbox" name="facteurrisque" value="Greffe de rein" id="id_acteurrisque_1">
+
+													"Greffe de rein"
+
+												</label>
+
+											</div>
+
+											<div>
+
+												<label for="id_facteurrisque_2">
+
+													<input type="checkbox" name="facteurrisque" value="Splenectomie" id="id_facteurrisque_2">
+
+													"Splenectomie"
+
+												</label>
+
+											</div>
+
+											<div>
+
+												<label for="id_facteurrisque_3">
+
+													<input type="checkbox" name="facteurrisque" value="Tabac" id="id_facteurrisque_3">
+
+													"Tabac"
+
+
+
+												</label>
+
+											</div>
+
+										</div>
+
+									</div>
+
+		
+
+		<div style="width: 50%;">
+
+			<label class="form-row-inner" for="id_Therapie">Therapie immunosuppressive&nbsp;:</label>
+
+			<div id="id_facteurrisque">
+
+				<div>
+
+					<label for="id_Therapie_0">
+
+						<input type="checkbox" name="Therapie" value="ChimioTherapie" id="id_Therapie_0">
+
+						"ChimioTherapie"
+
+					</label>
+
+				</div>
+
+				<div>
+
+					<label for="id_Therapie_1">
+
+						<input type="checkbox" name="Therapie" value="anti-TNF alpha" id="id_Therapie_1">
+
+						"anti-TNF alpha"
+
+					</label>
+
+				</div>
+
+
+
+				<div>
+
+					<label for="id_Therapie_2">
+
+						<input type="checkbox" name="Therapie" value="corticoTherapie" id="id_Therapie_2">
+
+						"corticoTherapie"
+
+					</label>
+
+				</div>
+
+			</div>
+
+		</div>
+
+	</div>
+
+	
+
+</fieldset>
+
+
+
+<fieldset style="margin-top: 20px; margin-bottom: 20px; ">
+
+	<legend class="titl">Traitement</legend>
+
+	<div class="form-row">
+
+		<div class="form-row-inner"
+
+			<div class="form-holder">
+
+				<label class="form-row-inner">
+
+				<input type="text" name="traitementAvantConsultation" maxlength="100" class="form-control"  id="id_traitementAvantConsultation">
+
+					<span class="label">traitement Avant Consultation</span>
+
+				</label>
+
+			</div>	
+
+	
+
+			<div class="form-holder">
+
+				<label class="form-row-inner">
+
+				<input type="text" name="traitementEncours" maxlength="100" class="form-control"  id="id_traitementEncours">
+
+					<span class="label">traitement en Cours </span>
+
+				</label>
+
+			</div>
+
+
+
+			<div class="form-holder">
+
+				<label class="form-row-inner">
+
+				<input type="text" name="AutreTraitementimmunosuppresseur" maxlength="100" class="form-control"  id="id_AutreTraitementimmunosuppresseur">
+
+					<span class="label">autre traitement immunosuppresseur </span>
+
+				</label>
+
+			</div>
+
+		</div>
+
+</div>
+
+</fieldset>
+
+
+
+<fieldset style="margin-top: 20px; margin-bottom: 20px; ">
+
+	<legend class="titl">Information Aditionelles</legend>
+
+	
+
+	<div class="form-row">
+
+		<div class="form-holder">
+
+			<label class="form-row-inner">
+
+				<input type="text" name="InfoSupDunEntourage" maxlength="100" class="form-control" id="id_InfoSupDunEntourage">
+
+				<span class="label">Information Supplementaire D'un Entourage (Nom,Prenom....)</span>
+
+			</label>
+
+		</div>
+
+		
+
+	</div>
+
+
+
+</fieldset>
+
+<center>
+
+	<table>
+
+	<tr><td style="padding: 5px;">   <button type="reset"> <input value="Delete" class="" style=" background-color:transparent; height:30px; border-color: #55e8d5; width: 100px; color: #fff; font-size: 17px; font-weight: 100; text-align: center; letter-spacing: 1px; color: #55e8d5;" ></button>
+
+	</td>
+
+	<td style="padding: 5px;"> <button type="submit"> <input value="Add" class="" style=" background-color:#55e8d5; height:30px; border-color:#55e8d5 ; width: 100px; color: #fff; font-size: 17px; font-weight: 100; text-align: center; letter-spacing: 1px;" ></button>
+		
+
+	</td>
+
+	<td>
+
+		<td style="padding: 5px;">  <a href=" {% url  'medecin' %} "> <input value="Quitter" class="" style=" background-color:#A01E19; height:30px; border-color: #A01E19; width: 100px; color: #fff; font-size: 17px; font-weight: 100; text-align: center; letter-spacing: 1px;" ></a>
+
+
+
+	</td>
+
+</tr>
+
+</table>
+
+</center>
+
+			            </section>
+
+		        	</div>
+
+		        </form>
+
+			</div>
+
+		</div>
+
+	</div>
+
+
+
+	<script src="{% static 'js/jquery-3.3.1.min.js' %}"></script>
+
+	<script src="{% static 'js/jquery.steps.js' %}"></script>
+
+	<script src="{% static 'js/jquery-ui.min.js' %}"></script>
+
+	<script src="{% static 'js/main.js' %}"></script>
+
+</body>
+
+</html>
+
+ {% endblock content %}
+
+
+
+
+
+
+

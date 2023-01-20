@@ -1,0 +1,10 @@
+asgiref==3.5.2
+distlib==0.3.4
+Django==4.0.4
+django-widget-tweaks==1.4.12
+filelock==3.7.1
+platformdirs==2.5.2
+pytz==2022.2.1
+six==1.16.0
+sqlparse==0.4.2
+virtualenv==20.15.1
